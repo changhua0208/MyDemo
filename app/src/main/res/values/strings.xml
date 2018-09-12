@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">MyDemo</string>
+    <string name="home">首页</string>
+    <string name="identity">身份认证</string>
+    <string name="query">查询</string>
+    <string name="mine">我的</string>
+    <string name="_new">新建</string>
+    <string name="number">编号</string>
+    <string name="name">姓名</string>
+    <string name="address">住址</string>
+    <string name="item">事项</string>
+    <string name="comparison">人证对比</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="identity_1">身份证认证</string>
+    <string name="identity_2">人脸识别</string>
+    <string name="identity_3">指纹识别</string>
+    <string name="fp_collection">指纹采集</string>
+    <string name="take_photo">现场拍照</string>
+    <string name="left_hand">左手</string>
+    <string name="right_hand">右手</string>
+    <string name="thumb_finger">大拇指</string>
+    <string name="index_finger">食指</string>
+    <string name="middle_finger">中指</string>
+    <string name="ring_finger">无名指</string>
+    <string name="little_finger">小拇指</string>
+    <string name="photo">现场照片</string>
+    <string name="identity_photo">身份证照</string>
+    <string name="identity_info">身份信息</string>
+    <string name="birthday">出生</string>
+    <string name="identity_no">身份证</string>
+    <string name="similarity">相似度</string>
+
+</resources>
