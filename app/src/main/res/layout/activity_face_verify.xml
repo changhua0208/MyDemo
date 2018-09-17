@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
     <TextView
         android:id="@+id/tv_title_photo"
         android:layout_width="wrap_content"
@@ -11,12 +14,13 @@
         />
     <ImageView
         android:id="@+id/img_photo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_below="@id/tv_title_photo"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:src="@drawable/u2"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,14 +32,15 @@
 
     <ImageView
         android:id="@+id/img_identity_photo"
-        android:layout_width="90dp"
-        android:layout_height="120dp"
+        android:layout_width="180dp"
+        android:layout_height="240dp"
         android:scaleType="fitCenter"
         android:layout_below="@id/tv_title_photo"
         android:layout_toRightOf="@id/img_photo"
         android:text="@string/identity_photo"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="24dp"
+        android:src="@drawable/u2"
         />
     <Button
         android:id="@+id/btn_cancel"
@@ -62,17 +67,16 @@
         />
 
     <RelativeLayout
-        android:layout_width="160dp"
+        android:layout_width="280dp"
         android:layout_height="210dp"
         android:background="@drawable/table_stroke_shape"
         android:layout_toRightOf="@id/img_identity_photo"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="96dp"
         android:layout_marginTop="24dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/identity_info"
-            android:textSize="12sp"
             android:layout_centerHorizontal="true"
             />
         <TextView
@@ -80,17 +84,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name"
-            android:textSize="12sp"
             android:layout_marginTop="24dp"
             android:layout_marginLeft="8dp"
             />
         <EditText
             android:id="@+id/et_name"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:layout_toRightOf="@id/tv_title_name"
-
             android:hint="@string/name"
             android:layout_marginLeft="16dp"
             android:layout_alignBaseline="@id/tv_title_name"
@@ -102,17 +103,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/birthday"
-            android:textSize="12sp"
             android:layout_marginTop="24dp"
             android:layout_marginLeft="8dp"
             />
         <EditText
             android:id="@+id/et_birthday"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:layout_toRightOf="@id/tv_title_birthday"
-
             android:hint="@string/birthday"
             android:layout_marginLeft="16dp"
             android:layout_alignBaseline="@id/tv_title_birthday"
@@ -124,15 +122,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/identity_no"
-            android:textSize="12sp"
             android:layout_marginTop="24dp"
             android:layout_marginLeft="8dp"
             />
         <EditText
             android:id="@+id/et_identity_no"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:layout_toRightOf="@id/tv_title_identity_no"
             android:hint="@string/identity_no"
             android:layout_alignLeft="@id/et_birthday"
@@ -144,15 +140,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/similarity"
-            android:textSize="12sp"
             android:layout_marginTop="24dp"
             android:layout_marginLeft="8dp"
             />
         <EditText
             android:id="@+id/et_similarity"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:layout_toRightOf="@id/tv_title_similarity"
             android:hint="@string/similarity"
             android:layout_alignLeft="@id/et_birthday"

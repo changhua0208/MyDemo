@@ -11,18 +11,22 @@
     <ImageView
         android:id="@+id/tv_obverse"
         android:layout_below="@id/tv_title_identity_1"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
+        android:layout_width="420dp"
+        android:layout_height="300dp"
+        android:scaleType="fitXY"
         android:layout_toRightOf="@id/tv_title_identity_1"
+        android:src="@drawable/u2"
         />
 
     <ImageView
         android:id="@+id/tv_reverse"
         android:layout_below="@id/tv_title_identity_1"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
+        android:layout_width="420dp"
+        android:layout_height="300dp"
         android:layout_toRightOf="@id/tv_obverse"
         android:layout_marginLeft="24dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/u2"
         />
     <Button
         android:id="@+id/btn_cancel"
@@ -35,6 +39,7 @@
         android:layout_marginBottom="16dp"/>
 
     <Button
+        android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save"

@@ -12,10 +12,9 @@
         <Button
             android:id="@+id/btn_new"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="@string/_new"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:padding="16dp"
             android:layout_margin="8dp"
             android:textSize="14sp"
             android:gravity="center"

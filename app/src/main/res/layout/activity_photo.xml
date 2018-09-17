@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
-        android:layout_width="match_parent" android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/img_photo"
-            android:layout_width="400dp"
-            android:layout_height="260dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:scaleType="centerCrop"/>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/img_photo"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/u2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp">
         <Button
             android:layout_marginTop="16dp"
             android:id="@+id/btn_take_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/img_photo"
-            android:layout_alignLeft="@id/img_photo"
             android:text="@string/take_photo"
-            android:padding="16dp"/>
+            android:padding="16dp"
+            android:layout_margin="8dp"/>
         <Button
             android:id="@+id/btn_save"
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/img_photo"
             android:text="@string/save"
             android:padding="16dp"
+            android:layout_margin="8dp"
             />
 
         <Button
@@ -36,10 +40,12 @@
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/img_photo"
-            android:layout_alignRight="@id/img_photo"
             android:text="@string/cancel"
-            android:padding="16dp"/>
+            android:padding="16dp"
+            android:layout_margin="8dp"/>
 
-    </RelativeLayout>
-</ScrollView>
+    </LinearLayout>
+
+
+</RelativeLayout>
+

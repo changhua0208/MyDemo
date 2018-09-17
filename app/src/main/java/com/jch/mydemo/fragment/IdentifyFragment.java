@@ -2,6 +2,8 @@ package com.jch.mydemo.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,14 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.jch.mydemo.ComparisonActivity;
 import com.jch.mydemo.NewIdentifyActivity;
 import com.jch.mydemo.R;
 import com.jch.mydemo.mode.DaoSession;
 import com.jch.mydemo.mode.Identity;
 import com.jch.mydemo.mode.IdentityDao;
 import com.jch.mydemo.utils.ApplicationUtils;
+import com.jch.mydemo.utils.CurrentIdentityUtils;
+import com.jch.mydemo.utils.IdentityHelper;
+import com.jch.mydemo.utils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +40,13 @@ import butterknife.OnClick;
  * @since 2018/9/10 下午4:52
  */
 
-public class IdentifyFragment extends Fragment {
+public class IdentifyFragment extends Fragment{
     public static final int CODE_NEW_IDENTITY = 100;
 
     @BindView(R.id.rv_identity)
     RecyclerView mRecyclerView;
 
     MyRecyclerAdapter mAdapter;
-
-//    String titleSex;
 
     @BindString(R.string.address) String titleAddr;
     @BindString(R.string.item) String titleItems;
@@ -136,12 +141,20 @@ public class IdentifyFragment extends Fragment {
                 holder.tvItems.setText(titleItems);
             }
             else {
-                Identity i = list.get(position -1);
+                final Identity i = list.get(position -1);
                 holder.tvName.setText(i.getName());
                 holder.tvAddr.setText(i.getAddress());
                 holder.tvNo.setText("" + i.getId());
                 holder.tvComparison.setText(i.getComparison());
                 holder.tvItems.setText(i.getItems());
+                holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        PopMenu popMenu = new PopMenu(i);
+                        popMenu.show(v);
+                        return false;
+                    }
+                });
             }
         }
 
@@ -162,7 +175,54 @@ public class IdentifyFragment extends Fragment {
             int position = this.list.size() + 1;
             this.list.add(identity);
             notifyItemInserted(position);
+        }
+    }
 
+    class PopMenu {
+        private PopupWindow mWindow;
+        private int w;
+        private int h;
+        private Identity identity;
+
+        public PopMenu(Identity identity){
+            this.identity = identity;
+            View contentView=LayoutInflater.from(getContext()).inflate(R.layout.win_select_identity_menu, null, false);
+            w = ScreenUtils.dip2px(getContext(),300);
+            h = ScreenUtils.dip2px(getContext(),300);
+            mWindow = new PopupWindow(contentView,w,h,false);
+            mWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            mWindow.setOutsideTouchable(true);
+            mWindow.setTouchable(true);
+            ButterKnife.bind(this,contentView);
+        }
+
+        public void show(View anchor){
+            mWindow.showAsDropDown(anchor,anchor.getWidth() / 2 - w / 2,10);
+        }
+
+        @OnClick(R.id.btn_comparison)
+        public void onComparision(){
+            IdentityHelper.getInstance().loadIdentityImages(identity);
+            CurrentIdentityUtils.save(this.identity);
+            Intent intent = new Intent(IdentifyFragment.this.getActivity(), ComparisonActivity.class);
+            IdentifyFragment.this.getActivity().startActivity(intent);
+            dismiss();
+        }
+
+        @OnClick(R.id.btn_cancel)
+        public void onCancel(){
+            dismiss();
+        }
+
+        @OnClick(R.id.btn_more_details)
+        public void onMoreDetails(){
+            //TODO
+            dismiss();
+        }
+
+        private void dismiss(){
+            if(mWindow.isShowing())
+                mWindow.dismiss();
         }
     }
 }

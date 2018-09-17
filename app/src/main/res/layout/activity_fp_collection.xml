@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout
 
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
     <TextView
+        android:id="@+id/tv_left_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/left_hand"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"/>
     <LinearLayout
+        android:id="@+id/ll_left"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/tv_left_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -23,9 +25,11 @@
             android:orientation="vertical"
             android:layout_marginLeft="48dp">
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:id="@+id/fp_l_1"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/u2"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -39,9 +43,11 @@
             android:orientation="vertical"
             android:layout_marginLeft="16dp">
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:id="@+id/fp_l_2"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/u2"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -54,9 +60,11 @@
             android:orientation="vertical"
             android:layout_marginLeft="16dp">
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:id="@+id/fp_l_3"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/u2"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -69,9 +77,11 @@
             android:orientation="vertical"
             android:layout_marginLeft="16dp">
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:id="@+id/fp_l_4"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/u2"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -84,9 +94,11 @@
             android:orientation="vertical"
             android:layout_marginLeft="16dp">
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:id="@+id/fp_l_5"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/u2"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -95,16 +107,17 @@
         </LinearLayout>
     </LinearLayout>
 
-
-
-
     <TextView
+        android:id="@+id/tv_right_title"
+        android:layout_below="@id/ll_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/right_hand"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"/>
     <LinearLayout
+        android:layout_below="@id/tv_right_title"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -114,9 +127,11 @@
             android:orientation="vertical"
             android:layout_marginLeft="48dp">
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:id="@+id/fp_r_1"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/u2"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -130,9 +145,11 @@
             android:orientation="vertical"
             android:layout_marginLeft="16dp">
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:id="@+id/fp_r_2"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/u2"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -145,9 +162,11 @@
             android:orientation="vertical"
             android:layout_marginLeft="16dp">
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:id="@+id/fp_r_3"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/u2"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -160,9 +179,11 @@
             android:orientation="vertical"
             android:layout_marginLeft="16dp">
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:id="@+id/fp_r_4"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/u2"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -175,9 +196,11 @@
             android:orientation="vertical"
             android:layout_marginLeft="16dp">
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:id="@+id/fp_r_5"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/u2"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -188,23 +211,24 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:layout_marginTop="24dp"
-        android:gravity="right">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/save"
-            />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="right"
+        android:layout_marginBottom="16dp">
 
         <Button
+            android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cancel"
+            android:text="@string/save" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"/>
+            android:text="@string/cancel" />
     </LinearLayout>
 
-</LinearLayout>
-</ScrollView>
+</RelativeLayout>

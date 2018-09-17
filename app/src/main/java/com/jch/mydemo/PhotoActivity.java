@@ -12,6 +12,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.widget.ImageView;
 
+import com.jch.mydemo.mode.Identity;
+import com.jch.mydemo.utils.CurrentIdentityUtils;
+import com.jch.mydemo.utils.IdentityHelper;
+
 import java.io.File;
 
 import butterknife.BindView;
@@ -55,7 +59,15 @@ public class PhotoActivity extends BaseActivity {
     @OnClick(R.id.btn_save)
     public void onSave(){
         //TODO copy
-        toast("保存成功");
+        Identity identity = CurrentIdentityUtils.currentIdentity();
+        boolean success = IdentityHelper.getInstance().savePhoto(identity,mImageFile);
+        if(success){
+            showMsg(R.string.msg_save_ok);
+        }
+        else{
+            showMsg(R.string.msg_save_fail);
+        }
+
     }
 
     @OnClick(R.id.btn_cancel)

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/list_item_click_bg">
 
     <TextView
         android:id="@+id/tv_no"
@@ -10,54 +11,54 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.8"
         android:text="@string/number"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:gravity="center"
         android:background="@drawable/table_stroke_shape"
-        android:textSize="12sp"/>
+        android:textSize="16sp"/>
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/name"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:gravity="center"
         android:background="@drawable/table_stroke_shape"
-        android:textSize="12sp"/>
+        android:textSize="16sp"/>
     <TextView
         android:id="@+id/tv_addr"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="@string/address"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:gravity="center"
         android:background="@drawable/table_stroke_shape"
-        android:textSize="12sp"/>
+        android:textSize="16sp"/>
     <TextView
         android:id="@+id/tv_items"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/item"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:gravity="center"
         android:background="@drawable/table_stroke_shape"
-        android:textSize="12sp"/>
+        android:textSize="16sp"/>
     <TextView
         android:id="@+id/tv_comparison"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".8"
         android:text="@string/comparison"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:gravity="center"
         android:background="@drawable/table_stroke_shape"
-        android:textSize="12sp"/>
+        android:textSize="16sp"/>
 
 </LinearLayout>

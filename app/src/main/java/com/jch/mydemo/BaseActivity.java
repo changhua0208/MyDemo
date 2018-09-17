@@ -2,6 +2,7 @@ package com.jch.mydemo;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -32,5 +33,19 @@ public class BaseActivity extends AppCompatActivity {
         return null;
     }
 
+    public void showMsg(String msg){
+        new AlertDialog.Builder(this).
+                setTitle(R.string.tip_title)
+                .setMessage(msg)
+                .setPositiveButton(R.string.ok,null)
+                .show();
+    }
 
+    public void showMsg(int resId){
+        new AlertDialog.Builder(this).
+                setTitle(R.string.tip_title)
+                .setMessage(resId)
+                .setPositiveButton(R.string.ok,null)
+                .show();
+    }
 }

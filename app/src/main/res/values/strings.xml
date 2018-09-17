@@ -30,5 +30,18 @@
     <string name="birthday">出生</string>
     <string name="identity_no">身份证</string>
     <string name="similarity">相似度</string>
+    <string name="more_details">查看详情</string>
+    <string name="tip_error">Error</string>
+    <string name="msg_fp_open_fail">打开指纹失败</string>
+    <string name="ok">好的</string>
+    <string name="tip_title">提示</string>
+    <string name="msg_save_ok">保存成功</string>
+    <string name="msg_save_fail">保存失败</string>
+    <string name="current_fp">现场指纹</string>
+    <string name="identity_fp">身份证指纹</string>
+    <string name="comparison1">对比1</string>
+    <string name="comparison2">对比2</string>
+    <string name="similarity1">相似度1</string>
+    <string name="similarity2">相似度2</string>
 
 </resources>

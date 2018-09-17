@@ -18,8 +18,8 @@
             >
             <Button
                 android:id="@+id/btn_identity1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="72dp"
                 android:layout_gravity="right"
                 android:paddingBottom="16dp"
                 android:paddingLeft="24dp"
@@ -35,8 +35,8 @@
             android:gravity="center">
             <Button
                 android:id="@+id/btn_identity2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="72dp"
                 android:text="@string/identity_2"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp"
@@ -53,8 +53,8 @@
             >
             <Button
                 android:id="@+id/btn_identity3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="72dp"
                 android:text="@string/identity_3"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp"
@@ -76,14 +76,14 @@
             android:gravity="right">
             <Button
                 android:id="@+id/btn_fp_collection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="72dp"
                 android:text="@string/fp_collection"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="24dp"
                 />
         </LinearLayout>
 
@@ -93,14 +93,14 @@
             android:layout_weight="1">
             <Button
                 android:id="@+id/btn_take_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="72dp"
                 android:text="@string/take_photo"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="24dp"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -111,8 +111,8 @@
         android:layout_marginTop="24dp">
         <Button
             android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="72dp"
             android:text="@string/cancel"/>
     </LinearLayout>
 
