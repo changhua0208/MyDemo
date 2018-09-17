@@ -5,11 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.jch.mydemo.mode.Identity;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.FileHandler;
 
 /**
  * @author changhua.jiang
@@ -198,6 +200,24 @@ public class IdentityHelper {
             }
         }
         return null;
+    }
+
+    public void saveIdentityView(Identity identity, View identityFront,View identityBack){
+        File dir = checkIdentityDir(identity);
+        Bitmap bmp = BitmapUtils.getBitmapFromView(identityFront);
+        File dstFile = new File(dir,"identity_front.png");
+        if(dstFile.exists())
+            FileUtils.delete(dstFile);
+        BitmapUtils.saveBmp(bmp,dstFile);
+
+        bmp.recycle();
+        bmp = BitmapUtils.getBitmapFromView(identityBack);
+        dstFile = new File(dir,"identity_back.png");
+        if(dstFile.exists())
+            FileUtils.delete(dstFile);
+        BitmapUtils.saveBmp(bmp,dstFile);
+        bmp.recycle();
+
     }
 
 

@@ -12,15 +12,19 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.widget.ImageView;
 
+import com.jch.mydemo.event.TakePhotoEvent;
 import com.jch.mydemo.mode.Identity;
+import com.jch.mydemo.utils.BitmapUtils;
 import com.jch.mydemo.utils.CurrentIdentityUtils;
 import com.jch.mydemo.utils.IdentityHelper;
+import com.jch.mydemo.utils.RxBus;
 
 import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observer;
 
 /**
  * @author changhua.jiang
@@ -34,26 +38,49 @@ public class PhotoActivity extends BaseActivity {
 
     @BindView(R.id.img_photo)
     ImageView mImgPhoto;
+    Bitmap bmp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
         ButterKnife.bind(this);
+
+        RxBus.getInstance().toObserverable(TakePhotoEvent.class).subscribe(new Observer<TakePhotoEvent>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(TakePhotoEvent takePhotoEvent) {
+                Bitmap bmp1 = BitmapUtils.byteArray2bmp(takePhotoEvent.getData());
+                bmp = BitmapUtils.rotate(bmp1,180);
+                mImgPhoto.setImageBitmap(bmp);
+                bmp1.recycle();
+            }
+        });
     }
 
     @OnClick(R.id.btn_take_photo)
     public void onTakePhoto(){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        mImageFile = this.createNewFile();
-        final Uri uri;
-        if (Build.VERSION.SDK_INT > 23) {
-            uri = FileProvider.getUriForFile(this, this.getPackageName() + ".provider", mImageFile);
-        } else {
-            uri = Uri.fromFile(mImageFile);
-        }
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        startActivityForResult(intent, REQUEST_TAKE_PHOTO);
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        mImageFile = this.createNewFile();
+//        final Uri uri;
+//        if (Build.VERSION.SDK_INT > 23) {
+//            uri = FileProvider.getUriForFile(this, this.getPackageName() + ".provider", mImageFile);
+//        } else {
+//            uri = Uri.fromFile(mImageFile);
+//        }
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//        startActivityForResult(intent, REQUEST_TAKE_PHOTO);
+        Intent intent = new Intent(this,CameraActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.btn_save)
@@ -89,7 +116,6 @@ public class PhotoActivity extends BaseActivity {
             //Log.e(TAG,mImageFile.getAbsolutePath());
             Bitmap bmp = BitmapFactory.decodeFile(mImageFile.getAbsolutePath());
             mImgPhoto.setImageBitmap(bmp);
-
         }
     }
 }
