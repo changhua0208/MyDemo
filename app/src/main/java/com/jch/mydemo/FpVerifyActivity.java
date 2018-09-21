@@ -7,9 +7,19 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jch.mydemo.mode.DaoSession;
+import com.jch.mydemo.mode.FpVerifyResult;
+import com.jch.mydemo.mode.FpVerifyResultDao;
 import com.jch.mydemo.mode.Identity;
+import com.jch.mydemo.utils.ApplicationUtils;
 import com.jch.mydemo.utils.CurrentIdentityUtils;
 import com.jch.mydemo.utils.IdentityHelper;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,64 +31,98 @@ import butterknife.OnClick;
  */
 
 public class FpVerifyActivity extends FpBaseActivity {
-    Bitmap currentFp1,currentFp2,identityFp1,identityFp2;
-    String currentFpFeature1,currentFpFeature2,identityFpFeature1,identityFpFeature2;
 
-    @BindView(R.id.img_current_fp1) ImageView mImgCurrentFp1;
-    @BindView(R.id.img_current_fp2) ImageView mImgCurrentFp2;
-    @BindView(R.id.img_identity_fp1) ImageView mImgIdentityFp1;
-    @BindView(R.id.img_identity_fp2) ImageView mImgIdentityFp2;
-    @BindView(R.id.et_name) TextView mName;
-    @BindView(R.id.et_identity_no) TextView mIdentityNo;
-    @BindView(R.id.et_birthday) TextView mBirthday;
-    @BindView(R.id.et_similarity1) TextView mSimilarity1;
-    @BindView(R.id.et_similarity2) TextView mSimilarity2;
+    Bitmap currentFp1,currentFp2;
+    String currentFpFeature1,currentFpFeature2;
 
+    @BindView(R.id.img_current_fp1)
+    ImageView mImgCurrentFp1;
+    @BindView(R.id.img_current_fp2)
+    ImageView mImgCurrentFp2;
+    @BindView(R.id.img_identity_fp1)
+    ImageView mImgIdentityFp1;
+    @BindView(R.id.img_identity_fp2)
+    ImageView mImgIdentityFp2;
+    @BindView(R.id.et_name)
+    TextView mName;
+    @BindView(R.id.et_identity_no)
+    TextView mIdentityNo;
+    @BindView(R.id.et_birthday)
+    TextView mBirthday;
+    @BindView(R.id.et_similarity1)
+    TextView mSimilarity1;
+    @BindView(R.id.et_similarity2)
+    TextView mSimilarity2;
+    @BindView(R.id.et_verify_time)
+    TextView mVerifyTime;
+
+    private FpVerifyResult verifyResult;
+    int currentIndex1 = -1;
+    int currentIndex2 = -1;
 
     Identity identity;
-    int currentIndex = 1;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fp_verify);
         ButterKnife.bind(this);
-
         identity = CurrentIdentityUtils.currentIdentity();
+        loadVerifyRecode();
         loadFp();
         initViews();
+    }
+
+    private void loadVerifyRecode() {
+        DaoSession daoSession = ApplicationUtils.getApplication().getDaoSession();
+        FpVerifyResultDao dao = daoSession.getFpVerifyResultDao();
+        List<FpVerifyResult> ret = dao.queryBuilder().where(FpVerifyResultDao.Properties.IdentityNo.eq(identity.getIdentityNo()))
+                .list();
+        if(ret != null && ret.size() > 0){
+            verifyResult = ret.get(0);
+        }
     }
 
     private void loadFp() {
         String data = identity.getFp1();
         if(!TextUtils.isEmpty(data)){
-            //identityFp1 = BitmapUtils.byteArray2bmp(data);
             int index = getIndexByFpName(identity.getFp1Name());
+            this.currentIndex1 = index;
             currentFp1 = IdentityHelper.getInstance().getFpImageByIndex(identity,index);
             currentFpFeature1 = IdentityHelper.getInstance().getFpFeatureByIndex(identity,index);
         }
         data = identity.getFp2();
         if(!TextUtils.isEmpty(data)){
-            //identityFp2 = BitmapUtils.byteArray2bmp(data);
             int index = getIndexByFpName(identity.getFp2Name());
+            this.currentIndex2 = index;
             currentFp2 = IdentityHelper.getInstance().getFpImageByIndex(identity,index);
             currentFpFeature2 = IdentityHelper.getInstance().getFpFeatureByIndex(identity,index);
         }
     }
 
     public void initViews(){
-//        if(identityFp2 != null)
-//            mImgIdentityFp2.setImageBitmap(identityFp2);
         if(currentFp2 != null)
             mImgCurrentFp2.setImageBitmap(currentFp2);
         if(currentFp1 != null)
             mImgCurrentFp1.setImageBitmap(currentFp1);
-//        if(identityFp1 != null)
-//            mImgIdentityFp1.setImageBitmap(identityFp1);
 
         mName.setText(identity.getName());
         mBirthday.setText(identity.getBirthDay());
         mIdentityNo.setText(identity.getIdentityNo());
+        if(verifyResult != null){
+            mSimilarity1.setText("" + verifyResult.getScore1());
+            mSimilarity2.setText("" +verifyResult.getScore2());
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = verifyResult.getVerifyTime();
+            if(date != null)
+                mVerifyTime.setText(format.format(date));
+        }
+        else {
+            mSimilarity1.setText("-1");
+            mSimilarity2.setText("-1");
+        }
+
     }
 
     @OnClick(R.id.btn_cancel)
@@ -89,6 +133,57 @@ public class FpVerifyActivity extends FpBaseActivity {
     @OnClick(R.id.btn_save)
     public void onSave(){
 
+        FpVerifyResultDao dao = ApplicationUtils.getApplication().getDaoSession().getFpVerifyResultDao();
+        if(verifyResult == null) {
+            verifyResult = new FpVerifyResult();
+            fillResult(identity,verifyResult);
+            dao.insert(verifyResult);
+
+            //initViews();
+        }
+        else{
+            fillResult(identity,verifyResult);
+            dao.update(verifyResult);
+
+            //initViews();
+        }
+    }
+
+    private void fillResult(Identity identity,FpVerifyResult result){
+        int score1 = -1;
+        int score2 = -1;
+        try {
+            score1 = Integer.parseInt(mSimilarity1.getText().toString());
+        }
+        catch (Exception e){
+
+        }
+
+        try {
+            score2 = Integer.parseInt(mSimilarity2.getText().toString());
+        }
+        catch (Exception e){
+
+        }
+        result.setIdentityNo(identity.getIdentityNo());
+        result.setFp1("" + currentIndex1);
+        result.setFp2("" + currentIndex2);
+        result.setScore1(score1);
+        result.setScore2(score2);
+        if(TextUtils.isEmpty(mVerifyTime.getText())) {
+            result.setVerifyTime(new Date());
+        }
+        else{
+            String time = mVerifyTime.getText().toString();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = null;
+            try {
+                date = format.parse(time);
+            } catch (ParseException e) {
+                date = new Date();
+            }
+            result.setVerifyTime(date);
+        }
     }
 
     @OnClick(R.id.btn_comparison1)
@@ -96,6 +191,9 @@ public class FpVerifyActivity extends FpBaseActivity {
         if(!TextUtils.isEmpty(identity.getFp1()) && !TextUtils.isEmpty(currentFpFeature1)){
             int ret = ssF.fingerComparison(identity.getFp1(),currentFpFeature1);
             mSimilarity1.setText("" + ret);
+            Date date = new Date();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            mVerifyTime.setText(format.format(date));
         }
     }
     @OnClick(R.id.btn_comparison2)
@@ -103,45 +201,11 @@ public class FpVerifyActivity extends FpBaseActivity {
         if(!TextUtils.isEmpty(identity.getFp2()) && !TextUtils.isEmpty(currentFpFeature2)){
             int ret = ssF.fingerComparison(identity.getFp2(),currentFpFeature2);
             mSimilarity2.setText("" + ret);
+            Date date = new Date();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            mVerifyTime.setText(format.format(date));
         }
-//        currentIndex = 2;
-//        mProgressDlg.show();
-//        new AsyncTask() {
-//            @Override
-//            protected Object doInBackground(Object[] objects) {
-//                byte[] data1 = (byte[]) objects[0];
-//                byte[] data2 = (byte[]) objects[1];
-//                ssF.getFingerByteData();
-//                String ret1 = ssF.getFingerInfoQuick(1,data1);
-//                SystemClock.sleep(500);
-//                ssF.getFingerByteData();
-//                String ret2 = ssF.getFingerInfoQuick(2,data2);
-//                if(!TextUtils.isEmpty(ret1) && !TextUtils.isEmpty(ret2)){
-////                byte[] fingerInfo1 = Util.hexStr2ByteArray(ret1);
-////                byte[] fingerInfo2 = Util.hexStr2ByteArray(ret2);
-//                    return ssF.fingerComparison(ret1,ret2);
-//                }
-//                return -1;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Object o) {
-//                mProgressDlg.dismiss();
-//                int ret = (int) o;
-//                if(currentIndex == 1){
-//                    mSimilarity1.setText("" + ret);
-//                }
-//                else if(currentIndex == 2){
-//                    mSimilarity2.setText("" + ret);
-//                }
-//
-//            }
-//        }.execute(data1,data2);
     }
-
-
-
-
 
 
     private int getIndexByFpName(String name){
@@ -179,4 +243,5 @@ public class FpVerifyActivity extends FpBaseActivity {
             return 0;
         }
     }
+
 }

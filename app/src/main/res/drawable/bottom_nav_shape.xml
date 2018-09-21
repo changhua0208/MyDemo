@@ -2,15 +2,28 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:state_pressed="true">
         <shape >
-            <solid android:color="@color/generan_bg_clicked" ></solid>
-            <stroke android:color="@color/generan_bg_clicked" android:width="1dip" />
+            <solid android:color="@color/bg_blue_dark" ></solid>
+            <stroke android:color="@color/main_bg" android:width="1dip" />
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape >
+            <solid android:color="@color/bg_blue" ></solid>
+            <stroke android:color="@color/main_bg" android:width="1dip" />
         </shape>
     </item>
 
-    <item android:state_pressed="false">
+    <item android:state_selected="true">
         <shape >
-            <solid android:color="@color/main_bg" ></solid>
-            <stroke android:color="@color/generan_bg_clicked" android:width="1dip" />
+            <solid android:color="@color/bg_blue_dark" ></solid>
+            <stroke android:color="@color/main_bg" android:width="1dip" />
+        </shape>
+    </item>
+
+    <item android:state_selected="false">
+        <shape >
+            <solid android:color="@color/bg_blue" ></solid>
+            <stroke android:color="@color/main_bg" android:width="1dip" />
         </shape>
     </item>
 </selector>

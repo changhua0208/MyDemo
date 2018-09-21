@@ -1,12 +1,14 @@
 package com.jch.mydemo.fragment;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,14 +19,21 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.jch.mydemo.ComparisonActivity;
+import com.jch.mydemo.DetailActivity;
 import com.jch.mydemo.NewIdentifyActivity;
 import com.jch.mydemo.R;
+import com.jch.mydemo.event.VerifyEvent;
 import com.jch.mydemo.mode.DaoSession;
+import com.jch.mydemo.mode.FaceVerifyResult;
+import com.jch.mydemo.mode.FaceVerifyResultDao;
+import com.jch.mydemo.mode.FpVerifyResult;
+import com.jch.mydemo.mode.FpVerifyResultDao;
 import com.jch.mydemo.mode.Identity;
 import com.jch.mydemo.mode.IdentityDao;
 import com.jch.mydemo.utils.ApplicationUtils;
 import com.jch.mydemo.utils.CurrentIdentityUtils;
 import com.jch.mydemo.utils.IdentityHelper;
+import com.jch.mydemo.utils.RxBus;
 import com.jch.mydemo.utils.ScreenUtils;
 
 import java.util.ArrayList;
@@ -34,6 +43,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observer;
 
 /**
  * @author changhua.jiang
@@ -65,6 +75,29 @@ public class IdentifyFragment extends Fragment{
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
         initData();
+
+        RxBus.getInstance().toObserverable(VerifyEvent.class).subscribe(new Observer<VerifyEvent>(){
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(VerifyEvent verifyEvent) {
+                Identity identity = CurrentIdentityUtils.currentIdentity();
+                DaoSession daoSession = ApplicationUtils.getApplication().getDaoSession();
+                daoSession.getIdentityDao().update(identity);
+                mAdapter.notifyDataSetChanged();
+            }
+
+        });
+
         return view;
     }
 
@@ -155,6 +188,15 @@ public class IdentifyFragment extends Fragment{
                         return false;
                     }
                 });
+//                holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        IdentityHelper.getInstance().loadIdentityResource(i);
+//                        CurrentIdentityUtils.save(i);
+//                        Intent intent = new Intent(IdentifyFragment.this.getActivity(), ComparisonActivity.class);
+//                        IdentifyFragment.this.getActivity().startActivity(intent);
+//                    }
+//                });
             }
         }
 
@@ -176,6 +218,13 @@ public class IdentifyFragment extends Fragment{
             this.list.add(identity);
             notifyItemInserted(position);
         }
+
+        public void remove(Identity identity){
+            if(list.contains(identity)){
+                list.remove(identity);
+                notifyDataSetChanged();
+            }
+        }
     }
 
     class PopMenu {
@@ -194,6 +243,9 @@ public class IdentifyFragment extends Fragment{
             mWindow.setOutsideTouchable(true);
             mWindow.setTouchable(true);
             ButterKnife.bind(this,contentView);
+
+            IdentityHelper.getInstance().loadIdentityResource(identity);
+            CurrentIdentityUtils.save(this.identity);
         }
 
         public void show(View anchor){
@@ -202,8 +254,7 @@ public class IdentifyFragment extends Fragment{
 
         @OnClick(R.id.btn_comparison)
         public void onComparision(){
-            IdentityHelper.getInstance().loadIdentityImages(identity);
-            CurrentIdentityUtils.save(this.identity);
+
             Intent intent = new Intent(IdentifyFragment.this.getActivity(), ComparisonActivity.class);
             IdentifyFragment.this.getActivity().startActivity(intent);
             dismiss();
@@ -217,7 +268,42 @@ public class IdentifyFragment extends Fragment{
         @OnClick(R.id.btn_more_details)
         public void onMoreDetails(){
             //TODO
+            Intent intent = new Intent(IdentifyFragment.this.getContext(), DetailActivity.class);
+            IdentifyFragment.this.startActivity(intent);
             dismiss();
+        }
+
+        @OnClick(R.id.btn_delete)
+        public void onDelete(){
+            dismiss();
+            new AlertDialog.Builder(IdentifyFragment.this.getContext())
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            DaoSession daoSession = ApplicationUtils.getApplication().getDaoSession();
+                            daoSession.getIdentityDao().delete(identity);
+                            FaceVerifyResultDao faceVerifyResultDao = daoSession.getFaceVerifyResultDao();
+                            List<FaceVerifyResult> list1 = faceVerifyResultDao.queryBuilder().where(FaceVerifyResultDao.Properties.IdentityNo.eq(identity.getIdentityNo()))
+                                    .list();
+                            if(list1.size() > 0){
+                                faceVerifyResultDao.delete(list1.get(0));
+                            }
+
+                            FpVerifyResultDao fpVerifyResultDao = daoSession.getFpVerifyResultDao();
+                            List<FpVerifyResult> list2 = fpVerifyResultDao.queryBuilder().where(FpVerifyResultDao.Properties.IdentityNo.eq(identity.getIdentityNo())).list();
+                            if(list2.size() > 0){
+                                fpVerifyResultDao.delete(list2.get(0));
+                            }
+
+                            IdentityHelper.getInstance().deleteIdentityFiles(identity);
+                            mAdapter.remove(identity);
+
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, null)
+                    .setMessage(R.string.msg_delete)
+                    .show();
+
         }
 
         private void dismiss(){

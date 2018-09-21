@@ -1,8 +1,6 @@
 package com.jch.mydemo;
 
-import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
-import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +10,6 @@ import android.view.SurfaceView;
 import android.view.View;
 
 import com.jch.mydemo.event.TakePhotoEvent;
-import com.jch.mydemo.utils.BitmapUtils;
 import com.jch.mydemo.utils.RxBus;
 
 import java.io.IOException;
@@ -52,8 +49,9 @@ public class CameraActivity extends AppCompatActivity {
                 Camera.Parameters parameters=camera.getParameters();
                 List<Camera.Size> list = parameters.getSupportedPreviewSizes();
                 parameters.setPreviewSize(list.get(list.size() -1).width,list.get(list.size() -1).height);
-//                List<Camera.Size> list2 = parameters.getSupportedPictureSizes();
-//                parameters.setPictureSize(list2.get(list2.size() -1).width,list2.get(list2.size() -1).height);
+                //List<Camera.Size> list2 = parameters.getSupportedPictureSizes();
+                //该pad支持4000*3000的，太大了，
+                parameters.setPictureSize(1280,720);
                 List<String> focusModes = parameters.getSupportedFocusModes();
                 if(focusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)){
                     parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);

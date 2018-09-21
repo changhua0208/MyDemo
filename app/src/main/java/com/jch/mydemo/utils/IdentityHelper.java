@@ -2,7 +2,6 @@ package com.jch.mydemo.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +10,6 @@ import com.jch.mydemo.mode.Identity;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.FileHandler;
 
 /**
  * @author changhua.jiang
@@ -40,24 +38,20 @@ public class IdentityHelper {
     }
 
     //现场照保存一张
-    public boolean savePhoto(Identity identity, File image){
+    public boolean savePhoto(Identity identity, Bitmap image){
         File dir = checkIdentityDir(identity);
-        File dstFile = new File(dir.getAbsolutePath(),"photo.jpg");
-        try {
-            if(dstFile.exists())
-                FileUtils.delete(dstFile);
-            FileUtils.copyFile(image,dstFile);
-        } catch (IOException e) {
-            return false;
+        File dstFile = new File(dir,"photo.png");
+        if(dstFile.exists()){
+            FileUtils.delete(dstFile);
         }
-        return true;
+        return BitmapUtils.saveBmp(image,dstFile);
     }
-
+    //获得现场照
     public Bitmap getPhoto(Identity identity){
         File dir = checkIdentityDir(identity);
-        File dstFile = new File(dir.getAbsolutePath(),"photo.jpg");
+        File dstFile = new File(dir.getAbsolutePath(),"photo.png");
         if(dstFile.exists()){
-            Bitmap bmp = BitmapFactory.decodeFile(dstFile.getAbsolutePath());
+            Bitmap bmp = BitmapUtils.getBitmapFromFile(dstFile);
             return bmp;
         }
         else{
@@ -65,17 +59,38 @@ public class IdentityHelper {
         }
     }
 
+    //获得已认证的人脸照片
+    public Bitmap getVerifiedFace(Identity identity){
+        File dir = checkIdentityDir(identity);
+        File dstFile = new File(dir,"verified_face.png");
+        if(dstFile.exists()) {
+            return BitmapUtils.getBitmapFromFile(dstFile);
+        }
+        else{
+            return null;
+        }
+    }
+    //保存人脸认证照片
+    public boolean saveVerfiedFace(Identity identity,Bitmap bmp){
+        File dir = checkIdentityDir(identity);
+        File dstFile = new File(dir,"verified_face.png");
+        if(dstFile.exists())
+            FileUtils.delete(dstFile);
+        return BitmapUtils.saveBmp(bmp,dstFile);
+    }
+
+    //保存证件照头像
     public boolean saveHeadImage(Identity identity,Bitmap bmp){
         File dir = checkIdentityDir(identity);
         File dstFile = new File(dir,"head.png");
         return BitmapUtils.saveBmp(bmp,dstFile);
     }
-
+    //获得证件照头像
     public Bitmap getHeadImage(Identity identity){
         File dir = checkIdentityDir(identity);
         File dstFile = new File(dir,"head.png");
         if(dstFile.exists()){
-            Bitmap bmp = BitmapFactory.decodeFile(dstFile.getAbsolutePath());
+            Bitmap bmp = BitmapUtils.getBitmapFromFile(dstFile);
             return bmp;
         }
         else{
@@ -83,6 +98,7 @@ public class IdentityHelper {
         }
     }
 
+    //保存身份证中的指纹特征
     public void saveIdentityFpFeature(Identity identity){
         File dir = checkIdentityDir(identity);
         if(!TextUtils.isEmpty(identity.getFp1())){
@@ -107,14 +123,15 @@ public class IdentityHelper {
         }
     }
 
-    public void loadIdentityImages(Identity identity){
+    //加载身份证中的资源【头像、指纹】
+    public void loadIdentityResource(Identity identity){
         File dir = checkIdentityDir(identity);
         File dstFile = new File(dir,"head.png");
         try {
             byte[] data = FileUtils.readByteArray(dstFile);
             identity.setImage(data);
         } catch (IOException e) {
-            Log.e(TAG,"loadIdentityImages error",e);
+            Log.e(TAG,"loadIdentityResource error",e);
         }
 
         String fp1Name = identity.getFp1Name();
@@ -125,7 +142,7 @@ public class IdentityHelper {
                     String data = FileUtils.read(dstFile);
                     identity.setFp1(data);
                 } catch (IOException e) {
-                    Log.e(TAG,"loadIdentityImages error",e);
+                    Log.e(TAG,"loadIdentityResource error",e);
                 }
             }
         }
@@ -138,13 +155,13 @@ public class IdentityHelper {
                     String data = FileUtils.read(dstFile);
                     identity.setFp2(data);
                 } catch (IOException e) {
-                    Log.e(TAG,"loadIdentityImages error",e);
+                    Log.e(TAG,"loadIdentityResource error",e);
                 }
             }
         }
     }
 
-
+    //保存已采集的指纹图片
     //约定1-5为左手大拇指到小拇指，6-10为右手大拇指到小拇指
     public boolean saveFp(Identity identity,Bitmap bmp,int finger){
         File dir = checkIdentityDir(identity);
@@ -154,7 +171,7 @@ public class IdentityHelper {
         }
         return BitmapUtils.saveBmp(bmp,dstFile);
     }
-
+    //保存已采集的指纹特征
     public boolean saveFpFeature(Identity identity,String feature,int finger){
         File dir = checkIdentityDir(identity);
         File dstFile = new File(dir,finger + ".feature");
@@ -170,25 +187,28 @@ public class IdentityHelper {
         return true;
     }
 
+    //获得已采集的所有指纹图片
     public void getFpImage(Identity identity,Bitmap[] bmps){
         File dir = checkIdentityDir(identity);
         for(int i = 1;i <= 10;i++) {
             File dstFile = new File(dir, i + ".png");
             if(dstFile.exists()){
-                bmps[i - 1] = BitmapFactory.decodeFile(dstFile.getAbsolutePath());
+                bmps[i - 1] = BitmapUtils.getBitmapFromFile(dstFile);
             }
         }
     }
 
+    //获得已采集的指纹图片
     public Bitmap getFpImageByIndex(Identity identity,int index){
         File dir = checkIdentityDir(identity);
         File dstFile = new File(dir, index + ".png");
         if(dstFile.exists()){
-            return BitmapFactory.decodeFile(dstFile.getAbsolutePath());
+            return BitmapUtils.getBitmapFromFile(dstFile);
         }
         return null;
     }
 
+    //获得已采集的指纹特征
     public String getFpFeatureByIndex(Identity identity, int index){
         File dir = checkIdentityDir(identity);
         File dstFile = new File(dir, index + ".feature");
@@ -202,6 +222,7 @@ public class IdentityHelper {
         return null;
     }
 
+    //保存身份证图片
     public void saveIdentityView(Identity identity, View identityFront,View identityBack){
         File dir = checkIdentityDir(identity);
         Bitmap bmp = BitmapUtils.getBitmapFromView(identityFront);
@@ -220,6 +241,21 @@ public class IdentityHelper {
 
     }
 
+    public Bitmap[] getIdentityCardImage(Identity identity){
+        File dir = checkIdentityDir(identity);
+        File dstFile1 = new File(dir,"identity_front.png");
+        File dstFile2 = new File(dir,"identity_back.png");
+        if(!dstFile1.exists() || !dstFile2.exists()){
+            return null;
+        }
+        else{
+            Bitmap[] bmps = new Bitmap[2];
+            bmps[0] = BitmapUtils.getBitmapFromFile(dstFile1);
+            bmps[1] = BitmapUtils.getBitmapFromFile(dstFile2);
+            return bmps;
+        }
+    }
+
 
     private File checkIdentityDir(Identity identity){
         File dir = new File(rootDir,identity.getIdentityNo());
@@ -227,6 +263,11 @@ public class IdentityHelper {
             dir.mkdir();
         }
         return dir;
+    }
+
+    public void deleteIdentityFiles(Identity identity){
+        File dir = checkIdentityDir(identity);
+        FileUtils.delete(dir);
     }
 
 }

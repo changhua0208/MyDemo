@@ -11,7 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
-            abiFilters = ['armeabi']
+            abiFilters = ['armeabi','armeabi-v7a']
         }
     }
     buildTypes {
@@ -28,6 +28,12 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
@@ -40,5 +46,10 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.+'
     implementation 'com.squareup.okio:okio:1.13.0'
     implementation 'io.reactivex:rxjava:1.3.0'
+
+    compile(name: 'camera-release', ext: 'aar')
+    compile(name: 'livenessdetectorsdk-release', ext: 'aar')
+    compile(name: 'livenessdetectionviewsdk-release', ext: 'aar')
+    compile(name: 'liboffline_face_verification-release', ext: 'aar')
     //implementation 'pub.devrel:easypermissions:1.3.0'
 }

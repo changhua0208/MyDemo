@@ -16,16 +16,26 @@
             android:layout_weight="1"
             android:gravity="right"
             >
-            <Button
+            <!--<Button-->
+                <!--android:id="@+id/btn_identity1"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="72dp"-->
+                <!--android:layout_gravity="right"-->
+                <!--android:paddingBottom="16dp"-->
+                <!--android:paddingLeft="24dp"-->
+                <!--android:paddingRight="24dp"-->
+                <!--android:paddingTop="16dp"-->
+                <!--android:text="@string/identity_1" />-->
+            <TextView
                 android:id="@+id/btn_identity1"
-                android:layout_width="120dp"
-                android:layout_height="72dp"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
                 android:layout_gravity="right"
-                android:paddingBottom="16dp"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
-                android:paddingTop="16dp"
-                android:text="@string/identity_1" />
+                android:background="@drawable/bg_identity_verify_btn"
+                android:gravity="center"
+                android:text="@string/identity_1"
+                android:textColor="@color/white"
+                android:textSize="32sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -33,15 +43,26 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
-            <Button
+            <!--<Button-->
+                <!--android:id="@+id/btn_identity2"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="72dp"-->
+                <!--android:text="@string/identity_2"-->
+                <!--android:paddingLeft="24dp"-->
+                <!--android:paddingRight="24dp"-->
+                <!--android:paddingTop="16dp"-->
+                <!--android:paddingBottom="16dp"-->
+                <!--/>-->
+            <TextView
                 android:id="@+id/btn_identity2"
-                android:layout_width="120dp"
-                android:layout_height="72dp"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
                 android:text="@string/identity_2"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_face_verify_btn"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="32sp"
                 />
         </LinearLayout>
 
@@ -51,15 +72,26 @@
             android:layout_weight="1"
             android:gravity="left"
             >
-            <Button
+            <!--<Button-->
+                <!--android:id="@+id/btn_identity3"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="72dp"-->
+                <!--android:text="@string/identity_3"-->
+                <!--android:paddingLeft="24dp"-->
+                <!--android:paddingRight="24dp"-->
+                <!--android:paddingTop="16dp"-->
+                <!--android:paddingBottom="16dp"-->
+                <!--/>-->
+            <TextView
                 android:id="@+id/btn_identity3"
-                android:layout_width="120dp"
-                android:layout_height="72dp"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
                 android:text="@string/identity_3"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_fp_verify_btn"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="32sp"
                 />
         </LinearLayout>
 
@@ -68,22 +100,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="48dp">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="right">
-            <Button
+            <!--<Button-->
+                <!--android:id="@+id/btn_fp_collection"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="72dp"-->
+                <!--android:text="@string/fp_collection"-->
+                <!--android:paddingLeft="24dp"-->
+                <!--android:paddingRight="24dp"-->
+                <!--android:paddingTop="16dp"-->
+                <!--android:paddingBottom="16dp"-->
+                <!--android:layout_marginRight="24dp"-->
+                <!--/>-->
+            <TextView
                 android:id="@+id/btn_fp_collection"
-                android:layout_width="120dp"
-                android:layout_height="72dp"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
                 android:text="@string/fp_collection"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:layout_marginRight="24dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_fp_collection_btn"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:layout_marginRight="64dp"
                 />
         </LinearLayout>
 
@@ -91,16 +135,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-            <Button
+            <!--<Button-->
+                <!--android:id="@+id/btn_take_photo"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="72dp"-->
+                <!--android:text="@string/take_photo"-->
+                <!--android:paddingLeft="24dp"-->
+                <!--android:paddingRight="24dp"-->
+                <!--android:paddingTop="16dp"-->
+                <!--android:paddingBottom="16dp"-->
+                <!--android:layout_marginLeft="24dp"-->
+                <!--/>-->
+            <TextView
                 android:id="@+id/btn_take_photo"
-                android:layout_width="120dp"
-                android:layout_height="72dp"
-                android:text="@string/take_photo"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:layout_marginLeft="24dp"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
+                android:text="@string/locale_take_photo"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_take_photo_btn"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:layout_marginLeft="64dp"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -109,11 +165,19 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_marginTop="24dp">
-        <Button
+        <TextView
             android:id="@+id/btn_cancel"
             android:layout_width="120dp"
-            android:layout_height="72dp"
-            android:text="@string/cancel"/>
+            android:layout_height="40dp"
+            android:text="@string/cancel"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColor="@color/bg_blue"
+            android:background="@drawable/bg_cacel_btn"
+            android:textSize="20sp"
+            android:layout_margin="36dp"
+            />
     </LinearLayout>
 
 

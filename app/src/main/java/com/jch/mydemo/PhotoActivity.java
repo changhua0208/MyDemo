@@ -4,12 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
 import android.widget.ImageView;
 
 import com.jch.mydemo.event.TakePhotoEvent;
@@ -46,6 +42,8 @@ public class PhotoActivity extends BaseActivity {
         setContentView(R.layout.activity_photo);
         ButterKnife.bind(this);
 
+        initViews();
+
         RxBus.getInstance().toObserverable(TakePhotoEvent.class).subscribe(new Observer<TakePhotoEvent>() {
             @Override
             public void onCompleted() {
@@ -58,41 +56,40 @@ public class PhotoActivity extends BaseActivity {
             }
 
             @Override
-            public void onNext(TakePhotoEvent takePhotoEvent) {
+            public void onNext(final TakePhotoEvent takePhotoEvent) {
                 Bitmap bmp1 = BitmapUtils.byteArray2bmp(takePhotoEvent.getData());
                 bmp = BitmapUtils.rotate(bmp1,180);
-                mImgPhoto.setImageBitmap(bmp);
                 bmp1.recycle();
+                mImgPhoto.setImageBitmap(bmp);
+
             }
         });
     }
 
+    private void initViews() {
+        Identity identity = CurrentIdentityUtils.currentIdentity();
+        Bitmap bmp = IdentityHelper.getInstance().getPhoto(identity);
+        if(bmp != null){
+            mImgPhoto.setImageBitmap(bmp);
+        }
+    }
+
     @OnClick(R.id.btn_take_photo)
     public void onTakePhoto(){
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        mImageFile = this.createNewFile();
-//        final Uri uri;
-//        if (Build.VERSION.SDK_INT > 23) {
-//            uri = FileProvider.getUriForFile(this, this.getPackageName() + ".provider", mImageFile);
-//        } else {
-//            uri = Uri.fromFile(mImageFile);
-//        }
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-//        startActivityForResult(intent, REQUEST_TAKE_PHOTO);
         Intent intent = new Intent(this,CameraActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.btn_save)
     public void onSave(){
-        //TODO copy
-        Identity identity = CurrentIdentityUtils.currentIdentity();
-        boolean success = IdentityHelper.getInstance().savePhoto(identity,mImageFile);
-        if(success){
-            showMsg(R.string.msg_save_ok);
-        }
-        else{
-            showMsg(R.string.msg_save_fail);
+        if(bmp != null) {
+            Identity identity = CurrentIdentityUtils.currentIdentity();
+            boolean success = IdentityHelper.getInstance().savePhoto(identity, bmp);
+            if (success) {
+                showMsg(R.string.msg_save_ok);
+            } else {
+                showMsg(R.string.msg_save_fail);
+            }
         }
 
     }

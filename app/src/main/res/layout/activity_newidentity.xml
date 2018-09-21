@@ -5,22 +5,30 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true">
-    <TextView
+    <LinearLayout
         android:id="@+id/tv_title_new"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/_new"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        />
+        android:background="@color/bg_blue">
+        <TextView
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_new"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/tv_name"
         android:layout_below="@id/tv_title_new"
-        android:layout_width="200dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="24dp"
+        android:textSize="20sp"
+        android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"
         android:hint="姓名"
         />
@@ -28,10 +36,10 @@
     <EditText
         android:id="@+id/tv_birthday"
         android:layout_below="@id/tv_name"
-        android:layout_width="200dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"
         android:hint="出生年月"
         />
@@ -39,22 +47,23 @@
     <EditText
         android:id="@+id/tv_sex"
         android:layout_below="@id/tv_birthday"
-        android:layout_width="200dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"
         android:hint="性别"
         />
 
 
     <EditText
+
         android:id="@+id/tv_addr"
         android:layout_below="@id/tv_sex"
-        android:layout_width="400dp"
+        android:layout_width="720dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="24dp"
+        android:textSize="20sp"
+        android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"
         android:hint="住址"
         />
@@ -62,54 +71,113 @@
 
     <EditText
         android:id="@+id/tv_items"
-        android:layout_below="@id/tv_addr"
-        android:layout_width="400dp"
+        android:layout_width="720dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="16dp"
+        android:layout_alignLeft="@+id/tv_addr"
+        android:layout_alignStart="@+id/tv_addr"
+        android:layout_below="@+id/tv_addr"
+        android:layout_marginTop="32dp"
         android:hint="公证事项"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/tv_identity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="身份证照片"
+        android:textStyle="bold"
+        android:textSize="23sp"
+        android:layout_alignTop="@id/tv_name"
+        android:layout_alignRight="@id/tv_items"
         />
-
     <ImageView
         android:id="@+id/img_identity_photo"
-        android:layout_alignTop="@id/tv_name"
+        android:layout_below="@id/tv_identity_title"
         android:layout_width="120dp"
         android:layout_height="160dp"
         android:layout_alignRight="@id/tv_items"
-        android:src="@drawable/u2"
+        android:background="@color/bg_blue"
         android:scaleType="fitXY"
         />
-    <Button
+    <!--<Button-->
+        <!--android:id="@+id/btn_comparison"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:text="@string/comparison"-->
+        <!--android:layout_below="@id/tv_items"-->
+        <!--/>-->
+
+    <TextView
         android:id="@+id/btn_comparison"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
         android:text="@string/comparison"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/bg_blue"
+        android:background="@drawable/bg_cacel_btn"
+        android:textSize="18sp"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="16dp"
         android:layout_below="@id/tv_items"
         />
-    <Button
+
+    <TextView
         android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="16dp"
-        android:layout_alignParentRight="true"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
         android:text="@string/cancel"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/bg_blue"
+        android:background="@drawable/bg_cacel_btn"
+        android:textSize="18sp"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         />
 
-    <Button
+    <TextView
         android:id="@+id/btn_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="16dp"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
         android:text="@string/save"
-        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_save_btn"
+        android:textSize="18sp"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/btn_cancel"
-        android:layout_marginBottom="16dp"
         />
+
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_cancel"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:text="@string/cancel"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_save"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:text="@string/save"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_toLeftOf="@id/btn_cancel"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--/>-->
 </RelativeLayout>

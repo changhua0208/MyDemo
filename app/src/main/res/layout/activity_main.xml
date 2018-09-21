@@ -34,7 +34,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/bg_home_btn" />
+                    android:src="@drawable/home" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -42,6 +42,8 @@
                     android:layout_gravity="center"
                     android:textSize="18sp"
                     android:layout_marginLeft="8dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:text="@string/home" />
             </LinearLayout>
         </RelativeLayout>
@@ -63,7 +65,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/bg_identify_btn" />
+                    android:src="@drawable/verify" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -71,6 +73,8 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:text="@string/identity"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -93,7 +97,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/bg_query_btn" />
+                    android:src="@drawable/query" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -101,6 +105,8 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="8dp"
                     android:text="@string/query"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:textSize="18sp"/>
             </LinearLayout>
 
@@ -125,7 +131,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/bg_mine_btn"
+                    android:background="@drawable/mine"
                     />
 
                 <TextView
@@ -135,6 +141,8 @@
                     android:layout_marginLeft="8dp"
                     android:text="@string/mine"
                     android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:clickable="false"
                     />
             </LinearLayout>

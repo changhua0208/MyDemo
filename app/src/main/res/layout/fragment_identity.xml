@@ -7,77 +7,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/table_stroke_shape"
+        android:background="@color/bg_blue_dark"
         >
-        <Button
+
+        <TextView
             android:id="@+id/btn_new"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="96dp"
+            android:layout_height="40dp"
             android:text="@string/_new"
-            android:padding="16dp"
-            android:layout_margin="8dp"
-            android:textSize="14sp"
             android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_save_btn"
+            android:textSize="18sp"
+            android:layout_margin="16dp"
             />
+        <!--<Button-->
+            <!--android:id="@+id/btn_new"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/_new"-->
+            <!--android:padding="16dp"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:textSize="14sp"-->
+            <!--android:gravity="center"-->
+            <!--/>-->
     </LinearLayout>
 
-    <!--<TableLayout-->
-        <!--android:id="@+id/table_identity"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-        <!--<TableRow>-->
-            <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="0.8"-->
-                <!--android:text="@string/number"-->
-                <!--android:paddingTop="8dp"-->
-                <!--android:paddingBottom="8dp"-->
-                <!--android:gravity="center"-->
-                <!--android:background="@drawable/table_stroke_shape"-->
-                <!--android:textSize="12sp"/>-->
-            <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="@string/name"-->
-                <!--android:paddingTop="8dp"-->
-                <!--android:paddingBottom="8dp"-->
-                <!--android:gravity="center"-->
-                <!--android:background="@drawable/table_stroke_shape"-->
-                <!--android:textSize="12sp"/>-->
-            <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="2"-->
-                <!--android:text="@string/address"-->
-                <!--android:paddingTop="8dp"-->
-                <!--android:paddingBottom="8dp"-->
-                <!--android:gravity="center"-->
-                <!--android:background="@drawable/table_stroke_shape"-->
-                <!--android:textSize="12sp"/>-->
-            <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="@string/item"-->
-                <!--android:paddingTop="8dp"-->
-                <!--android:paddingBottom="8dp"-->
-                <!--android:gravity="center"-->
-                <!--android:background="@drawable/table_stroke_shape"-->
-                <!--android:textSize="12sp"/>-->
-            <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight=".8"-->
-                <!--android:text="@string/comparison"-->
-                <!--android:paddingTop="8dp"-->
-                <!--android:paddingBottom="8dp"-->
-                <!--android:gravity="center"-->
-                <!--android:background="@drawable/table_stroke_shape"-->
-                <!--android:textSize="12sp"/>-->
 
-        <!--</TableRow>-->
 
     <!--</TableLayout>-->
     <android.support.v7.widget.RecyclerView

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -44,8 +43,8 @@ public class NewIdentifyActivity extends BaseActivity {
     EditText mSex;
     @BindView(R.id.tv_items)
     EditText mItems;
-    @BindView(R.id.btn_comparison)
-    Button mBtnComparision;
+//    @BindView(R.id.btn_comparison)
+//    View mBtnComparision;
     @BindView(R.id.img_identity_photo)
     ImageView mImage;
 
@@ -196,7 +195,7 @@ public class NewIdentifyActivity extends BaseActivity {
         mAddr.setText("");
         mBirthday.setText("");
         mSex.setText("");
-        mImage.setImageResource(R.drawable.u2);
+        mImage.setImageBitmap(null);
     }
 
     public void autoFillInfo(){

@@ -4,163 +4,58 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true">
-    <TextView
-        android:id="@+id/tv_title_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/photo"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        />
-    <ImageView
-        android:id="@+id/img_photo"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_below="@id/tv_title_photo"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/u2"/>
+
+    <include
+        android:id="@+id/layout_face_verify"
+        layout="@layout/layout_face_verify"
+         />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/identity_photo"
-        android:layout_toRightOf="@id/img_photo"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="24dp"/>
-
-    <ImageView
-        android:id="@+id/img_identity_photo"
-        android:layout_width="180dp"
-        android:layout_height="240dp"
-        android:scaleType="fitCenter"
-        android:layout_below="@id/tv_title_photo"
-        android:layout_toRightOf="@id/img_photo"
-        android:text="@string/identity_photo"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="24dp"
-        android:src="@drawable/u2"
+        android:id="@+id/btn_comparison"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="@string/comparison"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/bg_blue"
+        android:background="@drawable/bg_cacel_btn"
+        android:textSize="20sp"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/layout_face_verify"
         />
-    <Button
+
+    <TextView
         android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="16dp"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
+        android:text="@string/cancel"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/bg_blue"
+        android:background="@drawable/bg_cacel_btn"
+        android:textSize="20sp"
+        android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/cancel"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+
         />
 
-    <Button
+    <TextView
         android:id="@+id/btn_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
         android:text="@string/save"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_save_btn"
+        android:textSize="20sp"
+        android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/btn_cancel"
-
-        />
-
-    <RelativeLayout
-        android:layout_width="280dp"
-        android:layout_height="210dp"
-        android:background="@drawable/table_stroke_shape"
-        android:layout_toRightOf="@id/img_identity_photo"
-        android:layout_marginLeft="96dp"
-        android:layout_marginTop="24dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/identity_info"
-            android:layout_centerHorizontal="true"
-            />
-        <TextView
-            android:id="@+id/tv_title_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/name"
-            android:layout_marginTop="24dp"
-            android:layout_marginLeft="8dp"
-            />
-        <EditText
-            android:id="@+id/et_name"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_title_name"
-            android:hint="@string/name"
-            android:layout_marginLeft="16dp"
-            android:layout_alignBaseline="@id/tv_title_name"
-            />
-
-        <TextView
-            android:id="@+id/tv_title_birthday"
-            android:layout_below="@id/tv_title_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/birthday"
-            android:layout_marginTop="24dp"
-            android:layout_marginLeft="8dp"
-            />
-        <EditText
-            android:id="@+id/et_birthday"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_title_birthday"
-            android:hint="@string/birthday"
-            android:layout_marginLeft="16dp"
-            android:layout_alignBaseline="@id/tv_title_birthday"
-            />
-
-        <TextView
-            android:id="@+id/tv_title_identity_no"
-            android:layout_below="@id/tv_title_birthday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/identity_no"
-            android:layout_marginTop="24dp"
-            android:layout_marginLeft="8dp"
-            />
-        <EditText
-            android:id="@+id/et_identity_no"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_title_identity_no"
-            android:hint="@string/identity_no"
-            android:layout_alignLeft="@id/et_birthday"
-            android:layout_alignBaseline="@id/tv_title_identity_no"
-            />
-        <TextView
-            android:id="@+id/tv_title_similarity"
-            android:layout_below="@id/tv_title_identity_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/similarity"
-            android:layout_marginTop="24dp"
-            android:layout_marginLeft="8dp"
-            />
-        <EditText
-            android:id="@+id/et_similarity"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_title_similarity"
-            android:hint="@string/similarity"
-            android:layout_alignLeft="@id/et_birthday"
-            android:layout_alignBaseline="@id/tv_title_similarity"
-            />
-    </RelativeLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/comparison"
-        android:layout_below="@id/img_photo"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
         />
 
 </RelativeLayout>

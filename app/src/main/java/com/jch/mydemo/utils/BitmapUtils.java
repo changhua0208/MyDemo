@@ -31,9 +31,9 @@ public class BitmapUtils {
             out = new FileOutputStream(dstFile);
             bmp.compress(Bitmap.CompressFormat.PNG,100,out);
         } catch (FileNotFoundException e) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public static byte[] bmp2byteArray(Bitmap bmp){
@@ -59,6 +59,10 @@ public class BitmapUtils {
         // Draw view to canvas
         v.draw(c);
         return b;
+    }
+
+    public static Bitmap getBitmapFromFile(File file){
+        return BitmapFactory.decodeFile(file.getAbsolutePath());
     }
 
     public static Bitmap  rotate(Bitmap bm, final int orientationDegree) {

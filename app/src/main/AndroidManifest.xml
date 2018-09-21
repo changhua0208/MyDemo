@@ -50,8 +50,13 @@
             android:screenOrientation="landscape"></activity>
 
         <activity android:name=".CameraActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
+            android:hardwareAccelerated="true"
             ></activity>
+
+        <activity android:name=".SimpleFaceCaptureActivity" />
+        <activity android:name=".DetailActivity"
+            android:screenOrientation="landscape" />
 
 
         <provider
