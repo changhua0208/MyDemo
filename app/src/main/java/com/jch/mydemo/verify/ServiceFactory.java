@@ -13,6 +13,7 @@ public class ServiceFactory {
     private final FaceVerifier faceVerifier;
 
     public static synchronized void init(Context context) throws IOException {
+
         if (instance == null) instance = new ServiceFactory(context);
     }
 
@@ -20,8 +21,8 @@ public class ServiceFactory {
         faceVerifier = new FaceVerifier(context, R.raw.offline_verification_data);
     }
 
-    public static ServiceFactory getInstance() {
-        return instance;
+    public static synchronized ServiceFactory getInstance() {
+            return instance;
     }
 
     public FaceVerifier getFaceVerifier() {

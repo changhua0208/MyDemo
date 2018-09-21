@@ -1,6 +1,7 @@
 package com.jch.mydemo;
 
 import android.app.Application;
+import android.os.AsyncTask;
 
 import com.jch.mydemo.mode.DaoMaster;
 import com.jch.mydemo.mode.DaoSession;
@@ -26,15 +27,23 @@ public class App extends Application {
         super.onCreate();
         ApplicationUtils.init(this);
         IdentityHelper.getInstance().init(this);
-        try {
-            ServiceFactory.init(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,"mydemo");
         Database db = helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
+
+
+        AsyncTask task = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                try {
+                    ServiceFactory.init(App.this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+        task.execute();
     }
 
     public DaoSession getDaoSession(){

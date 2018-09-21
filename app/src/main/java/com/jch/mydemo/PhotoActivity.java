@@ -1,9 +1,10 @@
 package com.jch.mydemo;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
@@ -24,16 +25,15 @@ import rx.Observer;
 
 /**
  * @author changhua.jiang
- * @since 2018/9/12 下午3:09
  */
 
 public class PhotoActivity extends BaseActivity {
-    private File mImageFile;
-    private static final int REQUEST_TAKE_PHOTO = 100;
     private static final String TAG = "PhotoActivity";
 
     @BindView(R.id.img_photo)
     ImageView mImgPhoto;
+    ProgressDialog mProgressDlg;
+
     Bitmap bmp;
 
     @Override
@@ -67,6 +67,8 @@ public class PhotoActivity extends BaseActivity {
     }
 
     private void initViews() {
+        mProgressDlg = new ProgressDialog(this);
+
         Identity identity = CurrentIdentityUtils.currentIdentity();
         Bitmap bmp = IdentityHelper.getInstance().getPhoto(identity);
         if(bmp != null){
@@ -83,13 +85,26 @@ public class PhotoActivity extends BaseActivity {
     @OnClick(R.id.btn_save)
     public void onSave(){
         if(bmp != null) {
-            Identity identity = CurrentIdentityUtils.currentIdentity();
-            boolean success = IdentityHelper.getInstance().savePhoto(identity, bmp);
-            if (success) {
-                showMsg(R.string.msg_save_ok);
-            } else {
-                showMsg(R.string.msg_save_fail);
-            }
+            mProgressDlg.show();
+            AsyncTask<Object,Object,Boolean> task = new AsyncTask<Object,Object,Boolean>() {
+                @Override
+                protected Boolean doInBackground(Object[] objects) {
+                    Identity identity = CurrentIdentityUtils.currentIdentity();
+                    boolean success = IdentityHelper.getInstance().savePhoto(identity, bmp);
+                    return success;
+                }
+
+                @Override
+                protected void onPostExecute(Boolean success) {
+                    mProgressDlg.dismiss();
+                    if (success) {
+                        showMsg(R.string.msg_save_ok);
+                    } else {
+                        showMsg(R.string.msg_save_fail);
+                    }
+                }
+            };
+            task.execute();
         }
 
     }
@@ -103,16 +118,5 @@ public class PhotoActivity extends BaseActivity {
         File path = getDir("pictures", Context.MODE_PRIVATE);
         String fileName = System.currentTimeMillis() + ".jpg";
         return new File(path, fileName);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(REQUEST_TAKE_PHOTO == requestCode && resultCode == RESULT_OK)
-        {
-            //Log.e(TAG,mImageFile.getAbsolutePath());
-            Bitmap bmp = BitmapFactory.decodeFile(mImageFile.getAbsolutePath());
-            mImgPhoto.setImageBitmap(bmp);
-        }
     }
 }

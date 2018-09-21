@@ -38,12 +38,12 @@ public class FpBaseActivity extends BaseActivity {
             ssF=new SSFingerInterfaceImp(FpBaseActivity.this);
             nRet = ssF.f_powerOn();
             if(nRet == 0) {
-                for (int i = 0; i < 5; i++) {
-                    SystemClock.sleep(1000);
+                for (int i = 0; i < 26; i++) {
                     nRet = ssF.SS_USBConnect();
                     if (nRet == 0) {
                         break;
                     }
+                    SystemClock.sleep(200);
                 }
                 Message msg = Message.obtain();
                 msg.what = MSG_USB_CONNECTION;
