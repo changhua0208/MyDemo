@@ -320,6 +320,52 @@ public class DetailActivity extends BaseActivity {
             mVerifyTime.setText(format.format(result.getVerifyTime()));
             mSimilarity1.setText(String.valueOf(result.getScore1()));
             mSimilarity2.setText(String.valueOf(result.getScore2()));
+            int index1 = getIndexByFpName(identity.getFp1Name());
+            int index2 = getIndexByFpName(identity.getFp2Name());
+            Bitmap bmp1 = IdentityHelper.getInstance().getFpImageByIndex(identity,index1);
+            Bitmap bmp2 = IdentityHelper.getInstance().getFpImageByIndex(identity,index2);
+            if(bmp1 != null)
+                mFp1.setImageBitmap(bmp1);
+            if(bmp2 != null)
+                mFp2.setImageBitmap(bmp2);
+        }
+
+
+
+        private int getIndexByFpName(String name){
+            if(name.startsWith("左手拇指")){
+                return 1;
+            }
+            else if(name.startsWith("左手食指")){
+                return 2;
+            }
+            else if(name.startsWith("左手中指")){
+                return 3;
+            }
+            else if(name.startsWith("左手无名指")){
+                return 4;
+            }
+            else if(name.startsWith("左手小指")){
+                return 5;
+            }
+            else if(name.startsWith("右手拇指")){
+                return 6;
+            }
+            else if(name.startsWith("右手食指")){
+                return 7;
+            }
+            else if(name.startsWith("右手中指")){
+                return 8;
+            }
+            else if(name.startsWith("右手无名指")){
+                return 9;
+            }
+            else if(name.startsWith("右手小指")){
+                return 10;
+            }
+            else{
+                return 0;
+            }
         }
     }
 

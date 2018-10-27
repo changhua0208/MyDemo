@@ -143,7 +143,7 @@ public abstract class FaceCaptureMainActivity extends Activity implements FaceCa
         // 寻找设备上的后置摄像头
         int cameraCount = Camera.getNumberOfCameras();
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
-        int expectCameraFacing = Camera.CameraInfo.CAMERA_FACING_FRONT;
+        int expectCameraFacing = Camera.CameraInfo.CAMERA_FACING_BACK;
         for (int camIdx = 0; camIdx < cameraCount; camIdx++) {
             Camera.getCameraInfo(camIdx, cameraInfo);
 

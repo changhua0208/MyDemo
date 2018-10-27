@@ -27,7 +27,7 @@
                 android:id="@+id/fp_l_1"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/bg_blue"
                 />
 
@@ -49,7 +49,7 @@
                 android:id="@+id/fp_l_2"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/bg_blue"
                 />
 
@@ -70,7 +70,7 @@
                 android:id="@+id/fp_l_3"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/bg_blue"
                 />
             <TextView
@@ -90,7 +90,7 @@
                 android:id="@+id/fp_l_4"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/bg_blue"
                 />
             <TextView
@@ -110,7 +110,7 @@
                 android:id="@+id/fp_l_5"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/bg_blue"
                 />
             <TextView
@@ -148,7 +148,7 @@
                 android:id="@+id/fp_r_1"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/bg_blue"
                 />
             <TextView
@@ -169,7 +169,7 @@
                 android:id="@+id/fp_r_2"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/bg_blue"
                 />
             <TextView
@@ -189,7 +189,7 @@
                 android:id="@+id/fp_r_3"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/bg_blue"
                 />
             <TextView
@@ -209,7 +209,7 @@
                 android:id="@+id/fp_r_4"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/bg_blue"
                 />
             <TextView
@@ -229,7 +229,7 @@
                 android:id="@+id/fp_r_5"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/bg_blue"
                 />
             <TextView

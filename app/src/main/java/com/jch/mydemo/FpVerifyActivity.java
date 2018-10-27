@@ -138,13 +138,12 @@ public class FpVerifyActivity extends FpBaseActivity {
             verifyResult = new FpVerifyResult();
             fillResult(identity,verifyResult);
             dao.insert(verifyResult);
-
-            //initViews();
+            showMsg(R.string.msg_save_ok);
         }
         else{
             fillResult(identity,verifyResult);
             dao.update(verifyResult);
-
+            showMsg(R.string.msg_save_ok);
             //initViews();
         }
     }
