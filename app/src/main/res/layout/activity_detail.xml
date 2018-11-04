@@ -28,7 +28,7 @@
             android:orientation="horizontal"
             android:visibility="gone"
             >
-            <com.jch.mydemo.MyRadioButton
+            <com.houyi.notarization.MyRadioButton
                 android:id="@+id/rb_selection1"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/rl_face_verify_info"
                 android:visibility="gone">
-                <com.jch.mydemo.MyRadioButton
+                <com.houyi.notarization.MyRadioButton
                     android:id="@+id/rb_selection2"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 >
-                <com.jch.mydemo.MyRadioButton
+                <com.houyi.notarization.MyRadioButton
                     android:id="@+id/rb_selection3"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
@@ -156,7 +156,7 @@
             android:orientation="horizontal"
             android:visibility="gone"
             >
-            <com.jch.mydemo.MyRadioButton
+            <com.houyi.notarization.MyRadioButton
                 android:id="@+id/rb_selection4"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -198,7 +198,7 @@
             android:orientation="horizontal"
             android:visibility="gone"
             >
-            <com.jch.mydemo.MyRadioButton
+            <com.houyi.notarization.MyRadioButton
                 android:id="@+id/rb_selection5"
                 android:layout_width="32dp"
                 android:layout_height="32dp"

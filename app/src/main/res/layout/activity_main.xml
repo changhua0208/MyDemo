@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jch.mydemo.MainActivity"
+    tools:context="com.houyi.notarization.MainActivity"
     android:background="@color/main_bg">
     <LinearLayout
         android:id="@+id/tab_nav"
