@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="敬请期待"
-        android:textColor="@color/colorAccent"
-        android:layout_centerInParent="true"/>
-</RelativeLayout>
+        android:orientation="horizontal"
+        android:background="@color/bg_blue_dark"
+        >
+
+        <TextView
+            android:id="@+id/btn_new"
+            android:layout_width="96dp"
+            android:layout_height="40dp"
+            android:text="@string/_new"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_save_btn"
+            android:textSize="18sp"
+            android:layout_margin="16dp"
+            />
+    </LinearLayout>
+
+
+
+    <!--</TableLayout>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_identity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/layout_nota_title" ></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="100dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            >
+            <TextView
+                android:id="@+id/btn_parties"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
+                android:layout_gravity="right"
+                android:background="@drawable/bg_parties_btn"
+                android:gravity="center"
+                android:text="@string/paries"
+                android:textColor="@color/white"
+                android:textSize="32sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/btn_txt_res"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
+                android:text="@string/resource_txt"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_face_verify_btn"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            >
+            <TextView
+                android:id="@+id/btn_video"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
+                android:text="@string/resource_video"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_resource_btn"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="60dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            >
+            <TextView
+                android:id="@+id/btn_audio"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
+                android:layout_gravity="right"
+                android:background="@drawable/bg_audio_btn"
+                android:gravity="center"
+                android:text="@string/resource_audio"
+                android:textColor="@color/white"
+                android:textSize="32sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/btn_photo"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
+                android:text="@string/resource_photo"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_photo_btn"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            >
+            <TextView
+                android:id="@+id/btn_pigeonhole"
+                android:layout_width="200dp"
+                android:layout_height="120dp"
+                android:text="@string/resource_pigeonhole"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_pigeonhole_btn"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

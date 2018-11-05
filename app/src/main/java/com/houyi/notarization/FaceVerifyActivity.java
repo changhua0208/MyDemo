@@ -14,7 +14,7 @@ import com.houyi.notarization.event.VerifyEvent;
 import com.houyi.notarization.mode.DaoSession;
 import com.houyi.notarization.mode.FaceVerifyResult;
 import com.houyi.notarization.mode.FaceVerifyResultDao;
-import com.houyi.notarization.mode.Identity;
+import com.houyi.notarization.mode.Person;
 import com.houyi.notarization.utils.ApplicationUtils;
 import com.houyi.notarization.utils.BitmapUtils;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
@@ -88,7 +88,7 @@ public class FaceVerifyActivity extends BaseActivity {
 
     private void initViews() {
         mProgressDlg = new ProgressDialog(this);
-        Identity identity = CurrentIdentityUtils.currentIdentity();
+        Person identity = CurrentIdentityUtils.currentIdentity();
 
         FaceVerifyResultDao dao = daoSession.getFaceVerifyResultDao();
         List<FaceVerifyResult> list =  dao.queryBuilder().where(FaceVerifyResultDao.Properties.IdentityNo.eq(identity.getIdentityNo()))
@@ -143,7 +143,7 @@ public class FaceVerifyActivity extends BaseActivity {
             AsyncTask task = new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object[] objects) {
-                    Identity identity = CurrentIdentityUtils.currentIdentity();
+                    Person identity = CurrentIdentityUtils.currentIdentity();
                     if(faceVerifyRecode != null){
                         fillResult(identity,faceVerifyRecode);
                         daoSession.getFaceVerifyResultDao().update(faceVerifyRecode);
@@ -172,7 +172,7 @@ public class FaceVerifyActivity extends BaseActivity {
         }
     }
 
-    private void fillResult(Identity identity, FaceVerifyResult result){
+    private void fillResult(Person identity, FaceVerifyResult result){
         int score = -1;
         try {
             score = Integer.parseInt(mSimilarity.getText().toString());

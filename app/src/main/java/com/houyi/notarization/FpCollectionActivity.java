@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
-import com.houyi.notarization.mode.Identity;
+import com.houyi.notarization.mode.Person;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
 import com.houyi.notarization.utils.IdentityHelper;
 
@@ -119,7 +119,7 @@ public class FpCollectionActivity extends FpBaseActivity {
     public void loadFps(){
         bmps = new Bitmap[10];
         features = new String[10];
-        Identity identity = CurrentIdentityUtils.currentIdentity();
+        Person identity = CurrentIdentityUtils.currentIdentity();
         IdentityHelper.getInstance().getFpImage(identity,bmps);
         for(int i = 1;i<= bmps.length;i++){
             if(bmps[i - 1] != null)
@@ -255,7 +255,7 @@ public class FpCollectionActivity extends FpBaseActivity {
 
             @Override
             protected Object doInBackground(Object[] objects) {
-                Identity identity = CurrentIdentityUtils.currentIdentity();
+                Person identity = CurrentIdentityUtils.currentIdentity();
                 for(int i = 1;i<= bmps.length;i++){
                     Bitmap bmp = bmps[i -1];
                     String feature = features[i - 1];

@@ -1,22 +1,18 @@
 package com.houyi.notarization.mode;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.Transient;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * 身份
  * @author changhua.jiang
  * @since 2018/9/10 下午7:32
  */
-@Entity(indexes = {
-        @Index(value = "identityNo DESC", unique = true)
-})
-public class Identity  {
-   @Id(autoincrement = true)
-   private Long id;
+@Entity
+public class Person {
+   @Id
    private String identityNo;
    private String name;
    private String address;
@@ -30,7 +26,6 @@ public class Identity  {
    @Transient
    private byte[] image;
    private String nation;
-   private String issuinAuthority;
    private String fp1Name;
    private String fp2Name;
    @Transient
@@ -41,13 +36,11 @@ public class Identity  {
    private String endTime;
 
 
-
-   @Generated(hash = 733722077)
-   public Identity(Long id, String identityNo, String name, String address,
-           String sex, String items, String comparison, String year, String month,
-           String day, String nation, String issuinAuthority, String fp1Name,
-           String fp2Name, String beginTime, String endTime) {
-       this.id = id;
+   @Generated(hash = 975194240)
+   public Person(String identityNo, String name, String address, String sex,
+           String items, String comparison, String year, String month, String day,
+           String nation, String fp1Name, String fp2Name, String beginTime,
+           String endTime) {
        this.identityNo = identityNo;
        this.name = name;
        this.address = address;
@@ -58,24 +51,16 @@ public class Identity  {
        this.month = month;
        this.day = day;
        this.nation = nation;
-       this.issuinAuthority = issuinAuthority;
        this.fp1Name = fp1Name;
        this.fp2Name = fp2Name;
        this.beginTime = beginTime;
        this.endTime = endTime;
    }
 
-   @Generated(hash = 103828829)
-   public Identity() {
+   @Generated(hash = 1024547259)
+   public Person() {
    }
 
-   public Long getId() {
-      return id;
-   }
-
-   public void setId(Long id) {
-      this.id = id;
-   }
 
    public String getName() {
       return name;
@@ -141,14 +126,6 @@ public class Identity  {
       this.nation = nation;
    }
 
-   public String getIssuinAuthority() {
-      return issuinAuthority;
-   }
-
-   public void setIssuinAuthority(String issuinAuthority) {
-      this.issuinAuthority = issuinAuthority;
-   }
-
    public String getFp1() {
       return fp1;
    }
@@ -211,8 +188,8 @@ public class Identity  {
 
    @Override
    public boolean equals(Object obj) {
-      if(obj != null && obj instanceof  Identity){
-         Identity i = (Identity) obj;
+      if(obj != null && obj instanceof Person){
+         Person i = (Person) obj;
          if(getIdentityNo().equals(i.getIdentityNo())){
             return true;
          }

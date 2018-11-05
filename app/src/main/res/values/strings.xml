@@ -8,7 +8,7 @@
     <string name="number">编号</string>
     <string name="name">姓名</string>
     <string name="address">住址</string>
-    <string name="item">事项</string>
+    <string name="item">公证事项</string>
     <string name="comparison">人证对比</string>
     <string name="cancel">取消</string>
     <string name="save">保存</string>
@@ -51,5 +51,13 @@
     <string name="locale_take_photo">现场拍照</string>
     <string name="verify_time">认证时间</string>
     <string name="pic_save_as">保存为图片</string>
+    <string name="paries">当事人</string>
+    <string name="resource_txt">文书材料</string>
+    <string name="resource_video">录像</string>
+    <string name="resource_audio">录音</string>
+    <string name="resource_pigeonhole">归档</string>
+    <string name="resource_photo">照片</string>
+    <string name="applicant">申请人姓名</string>
+    <string name="notary">公证员</string>
 
 </resources>

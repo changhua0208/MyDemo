@@ -1,6 +1,6 @@
 package com.houyi.notarization.utils;
 
-import com.houyi.notarization.mode.Identity;
+import com.houyi.notarization.mode.Person;
 
 /**
  * 持有当前身份证信息
@@ -9,13 +9,13 @@ import com.houyi.notarization.mode.Identity;
  */
 
 public class CurrentIdentityUtils {
-    private static Identity identity;
+    private static Person identity;
 
-    public static void save(Identity i){
+    public static void save(Person i){
         identity = i;
     }
 
-    public static Identity currentIdentity(){
+    public static Person currentIdentity(){
         return identity;
     }
 }

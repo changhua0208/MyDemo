@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         mViewPagerMain.setAdapter(mAdapter);
 
         mViewPagerMain.addOnPageChangeListener(this);
-        currentIndex = 1;
+        currentIndex = 0;
         mViewPagerMain.setCurrentItem(currentIndex,false);
     }
 

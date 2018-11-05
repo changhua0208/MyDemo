@@ -18,7 +18,7 @@ import com.houyi.notarization.mode.FaceVerifyResult;
 import com.houyi.notarization.mode.FaceVerifyResultDao;
 import com.houyi.notarization.mode.FpVerifyResult;
 import com.houyi.notarization.mode.FpVerifyResultDao;
-import com.houyi.notarization.mode.Identity;
+import com.houyi.notarization.mode.Person;
 import com.houyi.notarization.utils.ApplicationUtils;
 import com.houyi.notarization.utils.BitmapUtils;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
@@ -112,7 +112,7 @@ public class DetailActivity extends BaseActivity {
         mFpCollectionViews = new FpCollection(mFpCollection);
         mLocalPhoto = new LocalPhoto(mPhotoInfo);
 
-        Identity identity = CurrentIdentityUtils.currentIdentity();
+        Person identity = CurrentIdentityUtils.currentIdentity();
         Bitmap[] bmps = IdentityHelper.getInstance().getIdentityCardImage(identity);
         if(bmps != null){
             mIdentityCard.setVisibility(View.VISIBLE);
@@ -276,7 +276,7 @@ public class DetailActivity extends BaseActivity {
             ButterKnife.bind(this,view);
         }
 
-        public void updateViews(Identity identity,FaceVerifyResult result){
+        public void updateViews(Person identity, FaceVerifyResult result){
             mName.setText(identity.getName());
             mBirthday.setText(identity.getBirthDay());
             mIdentityNo.setText(identity.getIdentityNo());
@@ -312,7 +312,7 @@ public class DetailActivity extends BaseActivity {
             ButterKnife.bind(this,view);
         }
 
-        public void updateViews(Identity identity,FpVerifyResult result){
+        public void updateViews(Person identity, FpVerifyResult result){
             mName.setText(identity.getName());
             mBirthday.setText(identity.getBirthDay());
             mIdentityNo.setText(identity.getIdentityNo());
@@ -395,7 +395,7 @@ public class DetailActivity extends BaseActivity {
             ButterKnife.bind(this,view);
         }
 
-        public void updateViews(Identity identity){
+        public void updateViews(Person identity){
             Bitmap[] fps = new Bitmap[10];
             IdentityHelper.getInstance().getFpImage(identity,fps);
             for(int i = 0;i < 10;i++){

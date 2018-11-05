@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.houyi.notarization.ComparisonActivity;
 import com.houyi.notarization.DetailActivity;
-import com.houyi.notarization.NewIdentifyActivity;
+import com.houyi.notarization.NewNotaActivity;
 import com.houyi.notarization.R;
 import com.houyi.notarization.event.VerifyEvent;
 import com.houyi.notarization.mode.DaoSession;
@@ -28,8 +28,8 @@ import com.houyi.notarization.mode.FaceVerifyResult;
 import com.houyi.notarization.mode.FaceVerifyResultDao;
 import com.houyi.notarization.mode.FpVerifyResult;
 import com.houyi.notarization.mode.FpVerifyResultDao;
-import com.houyi.notarization.mode.Identity;
-import com.houyi.notarization.mode.IdentityDao;
+import com.houyi.notarization.mode.Person;
+import com.houyi.notarization.mode.PersonDao;
 import com.houyi.notarization.utils.ApplicationUtils;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
 import com.houyi.notarization.utils.IdentityHelper;
@@ -90,9 +90,9 @@ public class IdentifyFragment extends Fragment{
 
             @Override
             public void onNext(VerifyEvent verifyEvent) {
-                Identity identity = CurrentIdentityUtils.currentIdentity();
+                Person identity = CurrentIdentityUtils.currentIdentity();
                 DaoSession daoSession = ApplicationUtils.getApplication().getDaoSession();
-                daoSession.getIdentityDao().update(identity);
+                daoSession.getPersonDao().update(identity);
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -103,14 +103,14 @@ public class IdentifyFragment extends Fragment{
 
     private void initData(){
         DaoSession daoSession = ApplicationUtils.getApplication().getDaoSession();
-        List<Identity> list = daoSession.getIdentityDao().loadAll();
+        List<Person> list = daoSession.getPersonDao().loadAll();
         mAdapter.addAll(list);
 
     }
 
     @OnClick(R.id.btn_new)
     public void onNew(){
-        Intent intent = new Intent(getContext(), NewIdentifyActivity.class);
+        Intent intent = new Intent(getContext(), NewNotaActivity.class);
         startActivityForResult(intent,CODE_NEW_IDENTITY);
 
     }
@@ -121,8 +121,8 @@ public class IdentifyFragment extends Fragment{
         if(requestCode == CODE_NEW_IDENTITY && resultCode == Activity.RESULT_OK){
             DaoSession daoSession = ApplicationUtils.getApplication().getDaoSession();
             String idNo = data.getStringExtra("identityNo");
-            List<Identity> list = daoSession.getIdentityDao().queryBuilder()
-                    .where(IdentityDao.Properties.IdentityNo.eq(idNo))
+            List<Person> list = daoSession.getPersonDao().queryBuilder()
+                    .where(PersonDao.Properties.IdentityNo.eq(idNo))
                     .list();
             if(list.size() > 0){
                 mAdapter.addAll(list);
@@ -150,7 +150,7 @@ public class IdentifyFragment extends Fragment{
 
     class MyRecyclerAdapter extends RecyclerView.Adapter<IdentityViewHolder>{
 
-        List<Identity> list;
+        List<Person> list;
 
         public MyRecyclerAdapter(){
             list = new ArrayList<>();
@@ -174,10 +174,10 @@ public class IdentifyFragment extends Fragment{
                 holder.tvItems.setText(titleItems);
             }
             else {
-                final Identity i = list.get(position -1);
+                final Person i = list.get(position -1);
                 holder.tvName.setText(i.getName());
                 holder.tvAddr.setText(i.getAddress());
-                holder.tvNo.setText("" + i.getId());
+                holder.tvNo.setText("" + position);
                 holder.tvComparison.setText(i.getComparison());
                 holder.tvItems.setText(i.getItems());
                 holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -188,15 +188,6 @@ public class IdentifyFragment extends Fragment{
                         return false;
                     }
                 });
-//                holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        IdentityHelper.getInstance().loadIdentityResource(i);
-//                        CurrentIdentityUtils.save(i);
-//                        Intent intent = new Intent(IdentifyFragment.this.getActivity(), ComparisonActivity.class);
-//                        IdentifyFragment.this.getActivity().startActivity(intent);
-//                    }
-//                });
             }
         }
 
@@ -205,7 +196,7 @@ public class IdentifyFragment extends Fragment{
             return list == null? 1 : list.size() + 1;
         }
 
-        public void addAll(List<Identity>  list){
+        public void addAll(List<Person>  list){
             if(list != null && list.size() > 0){
                 int position = this.list.size() + 1;
                 this.list.addAll(list);
@@ -213,13 +204,13 @@ public class IdentifyFragment extends Fragment{
             }
         }
 
-        public void addIdentity(Identity identity){
+        public void addIdentity(Person identity){
             int position = this.list.size() + 1;
             this.list.add(identity);
             notifyItemInserted(position);
         }
 
-        public void remove(Identity identity){
+        public void remove(Person identity){
             if(list.contains(identity)){
                 list.remove(identity);
                 notifyDataSetChanged();
@@ -231,9 +222,9 @@ public class IdentifyFragment extends Fragment{
         private PopupWindow mWindow;
         private int w;
         private int h;
-        private Identity identity;
+        private Person identity;
 
-        public PopMenu(Identity identity){
+        public PopMenu(Person identity){
             this.identity = identity;
             View contentView=LayoutInflater.from(getContext()).inflate(R.layout.win_select_identity_menu, null, false);
             w = ScreenUtils.dip2px(getContext(),300);
@@ -281,7 +272,7 @@ public class IdentifyFragment extends Fragment{
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             DaoSession daoSession = ApplicationUtils.getApplication().getDaoSession();
-                            daoSession.getIdentityDao().delete(identity);
+                            daoSession.getPersonDao().delete(identity);
                             FaceVerifyResultDao faceVerifyResultDao = daoSession.getFaceVerifyResultDao();
                             List<FaceVerifyResult> list1 = faceVerifyResultDao.queryBuilder().where(FaceVerifyResultDao.Properties.IdentityNo.eq(identity.getIdentityNo()))
                                     .list();

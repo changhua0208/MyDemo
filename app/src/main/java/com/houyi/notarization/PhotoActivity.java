@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.houyi.notarization.event.TakePhotoEvent;
-import com.houyi.notarization.mode.Identity;
+import com.houyi.notarization.mode.Person;
 import com.houyi.notarization.utils.BitmapUtils;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
 import com.houyi.notarization.utils.IdentityHelper;
@@ -69,7 +69,7 @@ public class PhotoActivity extends BaseActivity {
     private void initViews() {
         mProgressDlg = new ProgressDialog(this);
 
-        Identity identity = CurrentIdentityUtils.currentIdentity();
+        Person identity = CurrentIdentityUtils.currentIdentity();
         Bitmap bmp = IdentityHelper.getInstance().getPhoto(identity);
         if(bmp != null){
             mImgPhoto.setImageBitmap(bmp);
@@ -89,7 +89,7 @@ public class PhotoActivity extends BaseActivity {
             AsyncTask<Object,Object,Boolean> task = new AsyncTask<Object,Object,Boolean>() {
                 @Override
                 protected Boolean doInBackground(Object[] objects) {
-                    Identity identity = CurrentIdentityUtils.currentIdentity();
+                    Person identity = CurrentIdentityUtils.currentIdentity();
                     boolean success = IdentityHelper.getInstance().savePhoto(identity, bmp);
                     return success;
                 }

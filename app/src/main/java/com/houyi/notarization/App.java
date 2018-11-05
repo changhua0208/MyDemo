@@ -1,17 +1,13 @@
 package com.houyi.notarization;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import com.houyi.notarization.mode.DaoMaster;
 import com.houyi.notarization.mode.DaoSession;
 import com.houyi.notarization.utils.ApplicationUtils;
 import com.houyi.notarization.utils.IdentityHelper;
-import com.houyi.notarization.verify.ServiceFactory;
 
 import org.greenrobot.greendao.database.Database;
-
-import java.io.IOException;
 
 /**
  * @author changhua.jiang
@@ -32,18 +28,18 @@ public class App extends Application {
         daoSession = new DaoMaster(db).newSession();
 
 
-        AsyncTask task = new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] objects) {
-                try {
-                    ServiceFactory.init(App.this);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        };
-        task.execute();
+//        AsyncTask task = new AsyncTask() {
+//            @Override
+//            protected Object doInBackground(Object[] objects) {
+//                try {
+//                    ServiceFactory.init(App.this);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                return null;
+//            }
+//        };
+//        task.execute();
     }
 
     public DaoSession getDaoSession(){

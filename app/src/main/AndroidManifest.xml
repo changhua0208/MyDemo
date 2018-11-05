@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewIdentifyActivity"
+        <activity android:name=".NewNotaActivity"
             android:screenOrientation="landscape">
 
         </activity>
@@ -48,6 +48,10 @@
 
         <activity android:name=".IdentityVerifyActivity"
             android:screenOrientation="landscape"></activity>
+
+        <activity android:name=".NotarizationActivity"
+            android:screenOrientation="landscape">
+        </activity>
 
         <activity android:name=".CameraActivity"
             android:screenOrientation="landscape"

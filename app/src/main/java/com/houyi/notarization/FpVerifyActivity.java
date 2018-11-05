@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.houyi.notarization.mode.DaoSession;
 import com.houyi.notarization.mode.FpVerifyResult;
 import com.houyi.notarization.mode.FpVerifyResultDao;
-import com.houyi.notarization.mode.Identity;
+import com.houyi.notarization.mode.Person;
 import com.houyi.notarization.utils.ApplicationUtils;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
 import com.houyi.notarization.utils.IdentityHelper;
@@ -60,7 +60,7 @@ public class FpVerifyActivity extends FpBaseActivity {
     int currentIndex1 = -1;
     int currentIndex2 = -1;
 
-    Identity identity;
+    Person identity;
 
 
     @Override
@@ -148,7 +148,7 @@ public class FpVerifyActivity extends FpBaseActivity {
         }
     }
 
-    private void fillResult(Identity identity,FpVerifyResult result){
+    private void fillResult(Person identity, FpVerifyResult result){
         int score1 = -1;
         int score2 = -1;
         try {

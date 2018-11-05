@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.houyi.notarization.mode.Identity;
+import com.houyi.notarization.mode.Person;
 import com.houyi.notarization.utils.BitmapUtils;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
 import com.houyi.notarization.utils.IdentityHelper;
@@ -66,7 +65,7 @@ public class IdentityVerifyActivity extends BaseActivity {
     private void initViews(){
         mPd = new ProgressDialog(this);
 
-        Identity identity = CurrentIdentityUtils.currentIdentity();
+        Person identity = CurrentIdentityUtils.currentIdentity();
         mName.setText(identity.getName());
         mAddress.setText(identity.getAddress());
         mSex.setText(identity.getSex());
@@ -78,7 +77,7 @@ public class IdentityVerifyActivity extends BaseActivity {
         Bitmap head = BitmapUtils.byteArray2bmp(identity.getImage());
         mHead.setImageBitmap(head);
 
-        mAuthority.setText(identity.getIssuinAuthority());
+        //mAuthority.setText(identity.getIssuinAuthority());
         try {
             mTimeLimit.setText(format(identity.getBeginTime()) + "-" + format(identity.getEndTime()));
         }
@@ -98,7 +97,7 @@ public class IdentityVerifyActivity extends BaseActivity {
         AsyncTask task = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
-                Identity identity = CurrentIdentityUtils.currentIdentity();
+                Person identity = CurrentIdentityUtils.currentIdentity();
                 IdentityHelper.getInstance().saveIdentityView(identity,mIdentityFront,mIdentityBack);
                 return null;
             }

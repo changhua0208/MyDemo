@@ -10,10 +10,13 @@
     <color name="table_stroke">#212121</color>
     <color name="bg_blue">#2962FF</color>
     <color name="general_btn_bg">@color/bg_blue</color>
-    <color name="bg_orange">#FF6D00</color>
+    <color name="bg_orange">#FFA726</color>
     <color name="bg_yellow">#FFD740</color>
-    <color name="bg_red">#FF1744</color>
+    <color name="bg_red">#FF7043</color>
     <color name="bg_pink">#F48FB1</color>
     <color name="bg_blue_dark">#0D47A1</color>
+    <color name="bg_blue_light">#448AFF</color>
+    <color name="bg_jasper_light">#80CBC4</color>
+
 
 </resources>
