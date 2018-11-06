@@ -33,8 +33,8 @@ import com.houyi.notarization.mode.PersonDao;
 import com.houyi.notarization.utils.ApplicationUtils;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
 import com.houyi.notarization.utils.IdentityHelper;
-import com.houyi.notarization.utils.RxBus;
 import com.houyi.notarization.utils.ScreenUtils;
+import com.houyi.utils.RxBus;
 
 import java.util.ArrayList;
 import java.util.List;

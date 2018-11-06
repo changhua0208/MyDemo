@@ -14,7 +14,7 @@ import com.houyi.notarization.mode.Person;
 import com.houyi.notarization.utils.BitmapUtils;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
 import com.houyi.notarization.utils.IdentityHelper;
-import com.houyi.notarization.utils.RxBus;
+import com.houyi.utils.RxBus;
 
 import java.io.File;
 

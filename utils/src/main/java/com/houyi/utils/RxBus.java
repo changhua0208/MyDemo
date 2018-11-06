@@ -1,4 +1,4 @@
-package com.houyi.notarization.utils;
+package com.houyi.utils;
 
 import rx.Observable;
 import rx.functions.Func1;

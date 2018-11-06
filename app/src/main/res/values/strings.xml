@@ -59,5 +59,32 @@
     <string name="resource_photo">照片</string>
     <string name="applicant">申请人姓名</string>
     <string name="notary">公证员</string>
+    <string name="add_txt_res">添加文书材料</string>
+    <string name="application_form">申请书</string>
+    <string name="talk_record">谈话笔录</string>
+    <string name="btn_add">添加</string>
+    <string name="add_video">添加录像</string>
+
+    <string name="camera_permission_refuse">无法获取摄像头数据，请在手机应用权限管理中打开插旗地图的摄像头权限</string>
+    <string name="audio_permission_refuse">无法获取音频数据，请在手机应用权限管理中打开插旗地图的通话及本地录音的权限</string>
+    <string name="local_video_not_found">本地视频不存在，无法播放</string>
+    <string name="know_that">知道了</string>
+    <string name="start_recording">开始录制</string>
+    <string name="either_save_video">是否保存录制的视频文件</string>
+    <string name="sure_to_cancel">确定取消录制吗？</string>
+    <string name="discard">取消录制</string>
+    <string name="reRecord">重新拍摄</string>
+    <string name="camera_start_failed">摄像头启动失败</string>
+    <string name="sdcard_not_found">sd卡不存在</string>
+    <string name="play_cancel">播放已取消</string>
+    <string name="play_execption">播放异常</string>
+    <string name="recording">正在录制中</string>
+    <string name="video_playing">有视频正在播放</string>
+    <string name="url_null">播放路径为空</string>
+    <string name="record_time_too_short">录制时间太短</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="onpause_record_finish">录制结束，视频文件已保存</string>
 
 </resources>

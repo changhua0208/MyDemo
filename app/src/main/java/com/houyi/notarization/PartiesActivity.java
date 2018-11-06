@@ -37,15 +37,16 @@ public class PartiesActivity extends BaseActivity {
 
     MyRecyclerAdapter mAdapter;
 
-    @BindString(R.string.address) String titleAddr;
-    @BindString(R.string.item) String titleItems;
-    @BindString(R.string.applicant) String titleName;
     @BindString(R.string.number) String titleNo;
-    @BindString(R.string.notary) String titleComparison;
+    @BindString(R.string.applicant) String titleName;
+    @BindString(R.string.address) String titleAddr;
+    @BindString(R.string.birthday) String titleItems;
+    @BindString(R.string.comparison) String titleComparison;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home);
+        ButterKnife.bind(this);
         mAdapter = new MyRecyclerAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
@@ -62,6 +63,7 @@ public class PartiesActivity extends BaseActivity {
     @OnClick(R.id.btn_new)
     public void onNew(){
         Intent intent = new Intent(this, NewNotaActivity.class);
+        intent.putExtra("role",1);
         startActivityForResult(intent,CODE_NEW_IDENTITY);
 
     }
@@ -128,15 +130,15 @@ public class PartiesActivity extends BaseActivity {
                 final Notarization nota = list.get(position -1);
                 holder.tvName.setText(nota.getPerson().getName());
                 holder.tvAddr.setText(nota.getPerson().getAddress());
-                holder.tvNo.setText("" + nota.getNid());
-                holder.tvComparison.setText(nota.getNotary());
-                holder.tvItems.setText(nota.getNotarization());
+                holder.tvNo.setText("" + position);
+                holder.tvComparison.setText(nota.hasCompared() ? "是":"否");
+                holder.tvItems.setText(nota.getPerson().getBirthDay());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        CurrentNotaUtils.save(nota);
-                        Intent intent = new Intent(PartiesActivity.this,NotarizationActivity.class);
-                        PartiesActivity.this.startActivity(intent);
+//                        CurrentNotaUtils.save(nota);
+//                        Intent intent = new Intent(PartiesActivity.this,NotarizationActivity.class);
+//                        PartiesActivity.this.startActivity(intent);
                     }
                 });
             }

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">VideoLib</string>
+    <string name="record_init_fail">录制功能初始化失败</string>
+    <string name="record_time_too_short">录制时间太短</string>
+</resources>

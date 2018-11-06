@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rb_application_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xx申请书"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:textColor="@color/black"/>
+        <RadioButton
+            android:id="@+id/rb_talk_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xx谈话记录书"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:textColor="@color/black"/>
+        <RadioButton
+            android:id="@+id/rb_notification_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xx告知书"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:textColor="@color/black"/>
+    </RadioGroup>
+    <TextView
+        android:id="@+id/btn_add"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
+        android:text="@string/btn_add"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_save_btn"
+        android:textSize="20sp"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>

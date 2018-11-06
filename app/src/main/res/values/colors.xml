@@ -17,6 +17,12 @@
     <color name="bg_blue_dark">#0D47A1</color>
     <color name="bg_blue_light">#448AFF</color>
     <color name="bg_jasper_light">#80CBC4</color>
-
-
+    <color name="black">#424242</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="gray_gray">#cacaca</color>
+    <color name="gray">#ececec</color>
+    <color name="gray_white">#eeeeee</color>
+    <color name="gray_light">#997c7c7c</color>
+    <color name="green_pressed">#55aa99</color>
+    <color name="gray_dark">#442e2e2e</color>
 </resources>

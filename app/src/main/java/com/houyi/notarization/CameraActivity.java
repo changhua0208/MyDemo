@@ -10,7 +10,7 @@ import android.view.SurfaceView;
 import android.view.View;
 
 import com.houyi.notarization.event.TakePhotoEvent;
-import com.houyi.notarization.utils.RxBus;
+import com.houyi.utils.RxBus;
 
 import java.io.IOException;
 import java.util.List;

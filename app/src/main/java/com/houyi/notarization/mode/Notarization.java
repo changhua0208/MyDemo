@@ -1,5 +1,7 @@
 package com.houyi.notarization.mode;
 
+import com.houyi.notarization.utils.VerifyConst;
+
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -197,6 +199,14 @@ public class Notarization {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+    public boolean hasCompared(){
+        if(this.fp1Verify > VerifyConst.FP_VERIFY_THRESHOLD || this.fp2Verify > VerifyConst.FP_VERIFY_THRESHOLD || this.faceVerify > VerifyConst.FACE_VERIFY_THRESHOLD){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1894342372)
