@@ -6,6 +6,7 @@ import com.houyi.notarization.mode.DaoMaster;
 import com.houyi.notarization.mode.DaoSession;
 import com.houyi.notarization.utils.ApplicationUtils;
 import com.houyi.notarization.utils.IdentityHelper;
+import com.houyi.notarization.utils.NotaFileHelper;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -23,6 +24,7 @@ public class App extends Application {
         super.onCreate();
         ApplicationUtils.init(this);
         IdentityHelper.getInstance().init(this);
+        NotaFileHelper.getInstance().init(this);
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,"mydemo");
         Database db = helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();

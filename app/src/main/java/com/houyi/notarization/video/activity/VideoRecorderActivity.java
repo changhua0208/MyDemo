@@ -9,24 +9,18 @@ import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 
-import com.blibee.videolib.callback.IVideoRecordCallback;
-import com.blibee.videolib.recorder.RecordManager;
-import com.blibee.videolib.util.DialogHelper;
-import com.blibee.videolib.util.PermissionUtil;
 import com.houyi.notarization.R;
 import com.houyi.notarization.video.VideoConstants;
-import com.houyi.notarization.video.event.EventJSCloseRecord;
 import com.houyi.notarization.video.event.EventRecordCancel;
 import com.houyi.notarization.video.event.EventRecordComplete;
 import com.houyi.utils.RxBus;
-
-import java.util.Arrays;
-import java.util.List;
+import com.jch.videolib.callback.IVideoRecordCallback;
+import com.jch.videolib.recorder.RecordManager;
+import com.jch.videolib.util.DialogHelper;
+import com.jch.videolib.util.PermissionUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.Subscription;
-import rx.functions.Action1;
 
 /**
  * Created by zhanglin on 2017/9/7.
@@ -46,10 +40,12 @@ public class VideoRecorderActivity extends BaseActivity implements IVideoRecordC
     @BindView(R.id.open_light)
     ImageView ivOpenLight;
 
-    public static void actionLaunch(Context context, int maxDuration) {
+    public static void actionLaunch(Context context, int maxDuration,String output) {
         context.startActivity(new Intent(context, VideoRecorderActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                .putExtra("maxDuration", maxDuration));
+                .putExtra("maxDuration", maxDuration)
+                .putExtra("path",output)
+        );
     }
 
     @Override
@@ -67,9 +63,17 @@ public class VideoRecorderActivity extends BaseActivity implements IVideoRecordC
             return;
         }
         int maxDuration = getIntent().getIntExtra("maxDuration", VideoConstants.DEFAULT_MAX_DURATION);
+        String output = getIntent().getStringExtra("path");
+//        String localVideoPath = output + File.separator + SystemClock.currentThreadTimeMillis() + ".mp4";
+//        try {
+//            FileUtils.createNewFile(localVideoPath);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
         RecordManager.getInstance().setRecordWidth(VideoConstants.RECORD_WITH, VideoConstants.RECORD_HEIGHT);//设置录制视频的宽
         RecordManager.getInstance().setEncodingBitRate(VideoConstants.ENCODING_BIT_RATE);
-        RecordManager.getInstance().setSurfaceView(mContext, mVideoView, maxDuration, this);
+        RecordManager.getInstance().setSurfaceView(mContext, mVideoView, maxDuration,output, this);
 
     }
 
@@ -164,17 +168,17 @@ public class VideoRecorderActivity extends BaseActivity implements IVideoRecordC
         finish();
     }
 
-    @Override
-    public List<Subscription> getSubscriptions() {
-        return Arrays.asList(RxBus.getInstance().toObserverable(EventJSCloseRecord.class)
-                .subscribe(new Action1<EventJSCloseRecord>() {
-                    @Override
-                    public void call(EventJSCloseRecord event) {
-                        RecordManager.getInstance().stopRecord(false);
-                        finish();
-                    }
-                }));
-    }
+//    @Override
+//    public List<Subscription> getSubscriptions() {
+//        return Arrays.asList(RxBus.getInstance().toObserverable(EventJSCloseRecord.class)
+//                .subscribe(new Action1<EventJSCloseRecord>() {
+//                    @Override
+//                    public void call(EventJSCloseRecord event) {
+//                        RecordManager.getInstance().stopRecord(false);
+//                        finish();
+//                    }
+//                }));
+//    }
 
     public void showStopDialog(final String videoPath, final int duration) {
         DialogHelper.showTwoButtonDialog(mContext, mContext.getString(R.string.either_save_video), mContext.getString(R.string.save),
@@ -218,4 +222,6 @@ public class VideoRecorderActivity extends BaseActivity implements IVideoRecordC
             super.onBackPressed();
         }
     }
+
+
 }

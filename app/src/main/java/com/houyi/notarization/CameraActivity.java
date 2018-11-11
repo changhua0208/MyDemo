@@ -121,14 +121,6 @@ public class CameraActivity extends AppCompatActivity {
                 mOptBtns.setVisibility(View.VISIBLE);
                 CameraActivity.this.data = data;
                 camera.stopPreview();
-
-//                try {
-//                    FileOutputStream fileOutputStream=new FileOutputStream("/mnt/sdcard/DCIM/camera/LuoMei\"+System.currentTimeMillis()+\".png");
-//                    bitmap.compress(Bitmap.CompressFormat.PNG,85,fileOutputStream);
-//                    camera.stopPreview();
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                }
             }
         });
     }

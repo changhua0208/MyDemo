@@ -1,9 +1,15 @@
 package com.houyi.notarization;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Toast;
@@ -36,6 +42,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     private List<Fragment> fs;
     private MyFragmentAdapter mAdapter;
     private int currentIndex;
+    private static final int PERMISSION_REQUEST_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,37 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setUpViews();
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            String[] pers = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+            int hasPers = ContextCompat.checkSelfPermission(getApplication(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (hasPers != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,pers,PERMISSION_REQUEST_CODE);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(PERMISSION_REQUEST_CODE == requestCode ){
+            if(!checkGrantResult(grantResults)){
+                finish();
+            }
+        }
+    }
+
+    private boolean checkGrantResult(int[] grantResults){
+        if(grantResults != null && grantResults.length > 0){
+            boolean ret = true;
+            for(int grant : grantResults){
+
+                ret = (grant == PackageManager.PERMISSION_GRANTED) & ret;
+
+            }
+            return ret;
+        }
+        else
+            return false;
     }
 
     private void setUpViews() {

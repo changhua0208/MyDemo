@@ -1,4 +1,4 @@
-package com.blibee.videolib.player;
+package com.jch.videolib.player;
 
 
 public class SwitchVideoModel {

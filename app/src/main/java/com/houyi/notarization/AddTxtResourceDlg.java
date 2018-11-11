@@ -2,12 +2,9 @@ package com.houyi.notarization;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.RadioButton;
-
-import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,11 +42,6 @@ public class AddTxtResourceDlg extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == CODE_OPEN_FILE_BROWSER && resultCode == RESULT_OK){
-            Uri uri = data.getData();
-            String path = uri.getPath();
-            File file = new File(path);
-//            FileHelper.openFile(this,file);
-        }
+
     }
 }

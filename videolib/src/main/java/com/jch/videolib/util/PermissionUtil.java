@@ -1,4 +1,4 @@
-package com.blibee.videolib.util;
+package com.jch.videolib.util;
 
 import android.hardware.Camera;
 import android.media.AudioFormat;

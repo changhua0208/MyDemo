@@ -1,4 +1,4 @@
-package com.blibee.videolib.util;
+package com.jch.videolib.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -72,7 +72,7 @@ public class RecorderUtil {
         return thumbnailPath;
     }
 
-    private static Bitmap getThumbBitmap(String videoPath) {
+    public static Bitmap getThumbBitmap(String videoPath) {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(videoPath);
         Bitmap bitmap = retriever.getFrameAtTime();

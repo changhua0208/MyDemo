@@ -1,4 +1,4 @@
-package com.blibee.videolib.recorder;
+package com.jch.videolib.recorder;
 import android.content.Context;
 import android.os.PowerManager;
 

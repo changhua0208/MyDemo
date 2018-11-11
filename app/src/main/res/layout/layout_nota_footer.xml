@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_nota_footer"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+    <TextView
+        android:id="@+id/btn_cancel"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
+        android:text="@string/cancel"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/bg_blue"
+        android:background="@drawable/bg_cacel_btn"
+        android:textSize="20sp"
+        android:layout_marginRight="32dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+
+        />
+
+    <TextView
+        android:id="@+id/btn_pigeonhole"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@id/btn_cancel"
+        android:layout_alignTop="@id/btn_cancel"
+        android:background="@drawable/bg_save_btn"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/resource_pigeonhole"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/but_add_resource"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="32dp"
+        android:background="@drawable/bg_save_btn"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/add_txt_res"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_alignTop="@id/btn_save"/>
+
+</RelativeLayout>

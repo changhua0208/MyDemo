@@ -19,6 +19,11 @@ import butterknife.ButterKnife;
  */
 
 public class BaseNotaActivity extends BaseActivity {
+    public static final int TYPE_TXT = 1;
+    public static final int TYPE_VIDEO = 2;
+    public static final int TYPE_AUDIO = 3;
+    public static final int TYPE_IMG = 4;
+
     @BindView(R.id.tv_person_name)
     TextView mName;
     @BindView(R.id.tv_notarization)
@@ -27,6 +32,7 @@ public class BaseNotaActivity extends BaseActivity {
     TextView mNotary;
     @BindView(R.id.tv_create_time)
     TextView mCreateTime;
+
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
@@ -44,4 +50,5 @@ public class BaseNotaActivity extends BaseActivity {
         DateFormat fmt = new SimpleDateFormat("yyyy.MM.dd");
         mCreateTime.setText(fmt.format(date));
     }
+
 }

@@ -1,5 +1,6 @@
 package com.houyi.notarization.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -65,6 +66,10 @@ public class BitmapUtils {
         return BitmapFactory.decodeFile(file.getAbsolutePath());
     }
 
+    public static Bitmap getBitmapFromResource(Context context,int resId){
+        return BitmapFactory.decodeResource(context.getResources(),resId);
+    }
+
     public static Bitmap  rotate(Bitmap bm, final int orientationDegree) {
 
         Matrix m = new Matrix();
@@ -79,5 +84,20 @@ public class BitmapUtils {
         }
         return null;
 
+    }
+
+    public static Bitmap zoomImg(Bitmap bm, int newWidth ,int newHeight){
+        // 获得图片的宽高
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        // 计算缩放比例
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // 取得想要缩放的matrix参数
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        // 得到新的图片
+        Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+        return newbm;
     }
 }

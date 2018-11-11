@@ -32,12 +32,16 @@ public class NotarizationActivity extends BaseNotaActivity{
 
     @OnClick(R.id.btn_video)
     public void onVideo(){
-
+        Intent intent = new Intent(this,AddMediaActivity.class);
+        intent.putExtra("type",AddMediaActivity.TYPE_VIDEO);
+        startActivity(intent);
     }
 
     @OnClick(R.id.btn_audio)
     public void onAudio(){
-
+        Intent intent = new Intent(this,AddMediaActivity.class);
+        intent.putExtra("type",AddMediaActivity.TYPE_AUDIO);
+        startActivity(intent);
     }
 
     @OnClick(R.id.btn_txt_res)
@@ -48,7 +52,9 @@ public class NotarizationActivity extends BaseNotaActivity{
 
     @OnClick(R.id.btn_photo)
     public void onPhoto(){
-
+        Intent intent = new Intent(this,AddMediaActivity.class);
+        intent.putExtra("type",AddMediaActivity.TYPE_IMG);
+        startActivity(intent);
     }
 
     @OnClick(R.id.btn_pigeonhole)

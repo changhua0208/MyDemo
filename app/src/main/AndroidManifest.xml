@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -54,6 +57,18 @@
         <activity android:name=".PartiesActivity"
             android:screenOrientation="landscape">
 
+        </activity>
+        <activity android:name=".AddMediaActivity"
+            android:screenOrientation="landscape">
+
+        </activity>
+        <activity android:name=".video.activity.VideoPlayActivity"
+            android:screenOrientation="landscape">
+
+        </activity>
+
+        <activity android:name=".video.activity.VideoRecorderActivity"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity android:name=".CameraActivity"

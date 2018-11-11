@@ -1,4 +1,4 @@
-package com.blibee.videolib;
+package com.jch.videolib;
 
 import org.junit.Test;
 

@@ -3,20 +3,15 @@ package com.houyi.notarization.video.activity;
 import android.content.Context;
 import android.content.Intent;
 
-import com.blibee.videolib.callback.IVideoPlayCallback;
-import com.blibee.videolib.player.CustomVideo;
-import com.blibee.videolib.recorder.RecordManager;
 import com.houyi.notarization.R;
 import com.houyi.notarization.video.VideoConstants;
 import com.houyi.notarization.video.event.EventPlayVideo;
 import com.houyi.utils.RxBus;
-
-import java.util.Arrays;
-import java.util.List;
+import com.jch.videolib.callback.IVideoPlayCallback;
+import com.jch.videolib.player.CustomVideo;
+import com.jch.videolib.recorder.RecordManager;
 
 import butterknife.BindView;
-import rx.Subscription;
-import rx.functions.Action1;
 
 /**
  * Created by zhanglin on 2017/9/7.
@@ -53,19 +48,6 @@ public class VideoPlayActivity extends BaseActivity implements IVideoPlayCallbac
         videoPlayer.onVideoPause();
     }
 
-    @Override
-    public List<Subscription> getSubscriptions() {
-        return Arrays.asList(RxBus.getInstance().toObserverable(EventPlayVideo.class)
-                .subscribe(new Action1<EventPlayVideo>() {
-                    @Override
-                    public void call(EventPlayVideo event) {
-                        if (event.type == VideoConstants.VIDEO_PLAY_JS_FINISH) {
-                            videoPlayer.onDestroy();
-                            finish();
-                        }
-                    }
-                }));
-    }
 
     @Override
     public void onPlayError() {

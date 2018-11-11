@@ -1,4 +1,4 @@
-package com.blibee.videolib.callback;
+package com.jch.videolib.callback;
 
 /**
  * Created by zhanglin on 2017/9/7.

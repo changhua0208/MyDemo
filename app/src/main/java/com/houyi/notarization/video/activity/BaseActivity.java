@@ -8,11 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import java.util.List;
-
 import butterknife.ButterKnife;
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by zhanglin on 2017/7/25.
@@ -20,7 +16,6 @@ import rx.subscriptions.CompositeSubscription;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected Context mContext;
-    private CompositeSubscription mSubscriptions;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,11 +25,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initUIAndData();
         initFullScreen();
-        mSubscriptions = new CompositeSubscription();
-        if (getSubscriptions() != null)
-            for (Subscription subscription : getSubscriptions()) {
-                mSubscriptions.add(subscription);
-            }
     }
 
     public abstract int setContentView();
@@ -42,15 +32,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void initUIAndData();
 
 
-    public abstract List<Subscription> getSubscriptions();
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mSubscriptions != null && !mSubscriptions.isUnsubscribed()) {
-            mSubscriptions.unsubscribe();
-            mSubscriptions = null;
-        }
     }
 
     protected void initFullScreen() {

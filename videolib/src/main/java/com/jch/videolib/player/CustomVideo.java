@@ -1,4 +1,4 @@
-package com.blibee.videolib.player;
+package com.jch.videolib.player;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.blibee.videolib.R;
-import com.blibee.videolib.callback.IVideoPlayCallback;
-import com.blibee.videolib.recorder.RecordManager;
+import com.jch.videolib.R;
+import com.jch.videolib.callback.IVideoPlayCallback;
+import com.jch.videolib.recorder.RecordManager;
 import com.shuyu.gsyvideoplayer.listener.StandardVideoAllCallBack;
 import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;

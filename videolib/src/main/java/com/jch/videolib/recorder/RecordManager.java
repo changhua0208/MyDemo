@@ -1,4 +1,4 @@
-package com.blibee.videolib.recorder;
+package com.jch.videolib.recorder;
 
 import android.content.Context;
 import android.hardware.Camera;
@@ -8,9 +8,9 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.blibee.videolib.R;
-import com.blibee.videolib.callback.IVideoRecordCallback;
-import com.blibee.videolib.util.RecorderUtil;
+import com.jch.videolib.R;
+import com.jch.videolib.callback.IVideoRecordCallback;
+import com.jch.videolib.util.RecorderUtil;
 
 import java.io.File;
 import java.util.Collections;
@@ -56,7 +56,7 @@ public class RecordManager implements SurfaceHolder.Callback, MediaRecorder.OnEr
     private RecordManager() {
     }
 
-    public void setSurfaceView(Context context, SurfaceView mSurfaceView, int maxDuration, IVideoRecordCallback iVideoRecordCallback) {
+    public void setSurfaceView(Context context, SurfaceView mSurfaceView, int maxDuration,String output,IVideoRecordCallback iVideoRecordCallback) {
         this.iVideoRecordCallback = iVideoRecordCallback;
         this.maxDuration = maxDuration;
         this.context = context;
@@ -64,7 +64,7 @@ public class RecordManager implements SurfaceHolder.Callback, MediaRecorder.OnEr
         mSurfaceHolder.setFixedSize(previewWidth, previewHeight);
         mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         mSurfaceHolder.addCallback(this);
-        localVideoPath = RecorderUtil.createFile(context, RecorderUtil.VIDEO_DIR, RecorderUtil.VIDEO_SUFFIX);
+        localVideoPath = output;
     }
 
     public void startRecording() {
@@ -88,7 +88,7 @@ public class RecordManager implements SurfaceHolder.Callback, MediaRecorder.OnEr
             mMediaRecorder.setVideoEncodingBitRate(encodingBitRate);
             mMediaRecorder.setVideoFrameRate(defaultVideoFrameRate);
             // 实际视屏录制后的方向
-            mMediaRecorder.setOrientationHint(frontCamera == 1 ? 270 : 90);
+//            mMediaRecorder.setOrientationHint(frontCamera == 1 ? 270 : 90);
             mMediaRecorder.setMaxDuration(maxDuration);
             mMediaRecorder.setOutputFile(localVideoPath);
             mMediaRecorder.setOnErrorListener(this);
@@ -154,7 +154,7 @@ public class RecordManager implements SurfaceHolder.Callback, MediaRecorder.OnEr
             mCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
         }
         if (mCamera != null) {
-            mCamera.setDisplayOrientation(90);
+            mCamera.setDisplayOrientation(0);
             try {
                 mCamera.setPreviewDisplay(holder);
                 Camera.Parameters parameters = mCamera.getParameters();
