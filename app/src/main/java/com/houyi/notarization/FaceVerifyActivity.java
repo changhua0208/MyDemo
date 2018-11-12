@@ -19,15 +19,7 @@ import com.houyi.notarization.utils.ApplicationUtils;
 import com.houyi.notarization.utils.BitmapUtils;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
 import com.houyi.notarization.utils.IdentityHelper;
-import com.houyi.notarization.verify.ServiceFactory;
 import com.houyi.utils.RxBus;
-import com.oliveapp.face.liboffline_face_verification.FaceVerifier;
-import com.oliveapp.face.liboffline_face_verification.nativecode.FaceFeature;
-import com.oliveapp.face.liboffline_face_verification.nativecode.FeatureExtractResultList;
-import com.oliveapp.face.liboffline_face_verification.nativecode.FeatureExtractionOption;
-import com.oliveapp.face.liboffline_face_verification.nativecode.ImageType;
-import com.oliveapp.face.liboffline_face_verification.nativecode.LivenessPackage;
-import com.oliveapp.face.liboffline_face_verification.nativecode.VerifyResult;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -70,7 +62,6 @@ public class FaceVerifyActivity extends BaseActivity {
 
     //bmp1 照片 bmp2 身份证照
     private Bitmap bmp1,bmp2;
-    private FaceVerifier verifier;
     private DaoSession daoSession;
     private ProgressDialog mProgressDlg;
     private FaceVerifyResult faceVerifyRecode;
@@ -82,7 +73,6 @@ public class FaceVerifyActivity extends BaseActivity {
         setContentView(R.layout.activity_face_verify);
         ButterKnife.bind(this);
         daoSession = ApplicationUtils.getApplication().getDaoSession();
-        verifier = ServiceFactory.getInstance().getFaceVerifier();
         initViews();
     }
 
@@ -203,150 +193,40 @@ public class FaceVerifyActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_EXTRACT_FACE && resultCode == RESULT_OK){
-            boolean success = data.getBooleanExtra("is_success",false);
-            if(success){
-                byte[] encryptedData = data.getByteArrayExtra("package_content");
-                final byte[] frame = getFrameFromPackageData(encryptedData);
-                bmp1 = BitmapUtils.byteArray2bmp(frame);
-                mPhoto.setImageBitmap(bmp1);
-            }
         }
     }
 
     @OnClick(R.id.btn_comparison)
     public void onComparison(){
-        mProgressDlg.show();
-        AsyncTask<Object,Object,FVR> task = new AsyncTask<Object,Object,FVR>() {
-            @Override
-            protected FVR doInBackground(Object[] objects) {
-                if(bmp1 != null && bmp2 != null) {
-                    byte[] feature1 = extractFeature(bmp1, PHOTO_IMAGE);
-                    byte[] feature2 = extractFeature(bmp2, IDENTITY_IMAGE);
-                    if(feature1 != null && feature2 != null){
-                        VerifyResult ret = verifyFeature(feature1, feature2);
-                        FVR result = new FVR(ret);
-                        ret.delete();
-                        return result;
-                    }
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(FVR verifyResult) {
-                //if(mProgressDlg.isShowing())
-                mProgressDlg.dismiss();
-                if(verifyResult != null){
-                    mSimilarity.setText("" + verifyResult.score);
-                    Date date = new Date();
-                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    mVerifyTime.setText(format.format(date));
-                }
-            }
-        };
-        task.execute();
+//        mProgressDlg.show();
+//        AsyncTask<Object,Object,FVR> task = new AsyncTask<Object,Object,FVR>() {
+//            @Override
+//            protected FVR doInBackground(Object[] objects) {
+//                if(bmp1 != null && bmp2 != null) {
+//                    byte[] feature1 = extractFeature(bmp1, PHOTO_IMAGE);
+//                    byte[] feature2 = extractFeature(bmp2, IDENTITY_IMAGE);
+//                    if(feature1 != null && feature2 != null){
+//                        VerifyResult ret = verifyFeature(feature1, feature2);
+//                        FVR result = new FVR(ret);
+//                        ret.delete();
+//                        return result;
+//                    }
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(FVR verifyResult) {
+//                //if(mProgressDlg.isShowing())
+//                mProgressDlg.dismiss();
+//                if(verifyResult != null){
+//                    mSimilarity.setText("" + verifyResult.score);
+//                    Date date = new Date();
+//                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                    mVerifyTime.setText(format.format(date));
+//                }
+//            }
+//        };
+//        task.execute();
     }
-
-
-    private byte[] getFrameFromPackageData(byte[] packageData)
-    {
-        LivenessPackage pack = new LivenessPackage();
-        int rtn = verifier.parsePackageData(packageData, pack); // 解析数据
-        if (rtn != 0) return null;
-
-        byte[] data = verifier.getImageInPackage(pack, 0); // 获取人像图片数据
-        pack.delete();
-        return data;
-    }
-
-    public byte[] extractFeature(Bitmap bmp,int picType){
-        byte[] data = BitmapUtils.bmp2byteArray(bmp);
-        return extractFeature(data,picType);
-    }
-
-    public byte[] extractFeature(byte[] picByte, int picType) {
-        /****************************************************
-         *
-         * #  提取图像特征核心代码
-         *    1.实例一个FeatureExtractionOption参数对象，并设置参数
-         *    2.实例一个FeatureExtractResultList特征结果对象
-         *    3.执行FaceVerifier.extractFeatureFromImageContent()方法，传入参数为图像数据，参数对像，特征结果对象
-         *    4.在FeatureExtractResultList特征结果对象中，得到FaceFeature图像特征对象
-         *
-         ****************************************************/
-
-        // 设置option参数
-        FeatureExtractionOption opt = new FeatureExtractionOption();
-        FeatureExtractResultList res = new FeatureExtractResultList(); // 特征结果类
-
-        try {
-            opt.setEnableAutoFlip(false);
-            opt.setEnableAutoRotate(false);
-            opt.setMaxFacesAllowed(1);
-            // 若是捕获到的照片，设置ImageType为IMAGETYPE_LEIZHENGJIANZHAO;若是芯片照，设置ImageType为IMAGETYPE_XINPIANZHAO
-            opt.setImageType(picType == PHOTO_IMAGE ? ImageType.IMAGETYPE_LEIZHENGJIANZHAO : ImageType.IMAGETYPE_XINPIANZHAO);
-            opt.setIsQueryImage(picType == PHOTO_IMAGE); // 若是捕获到的照片，设置为1;若是芯片照，设置为0
-
-            int rtn = verifier.extractFeatureFromImageContent(picByte, opt, res); // 图片数据，参数，结果
-            if(rtn == 0) {
-                // 如果特征提取结果为空，对用户进行相关提示
-                if (res.isEmpty()) {
-                    return null;
-                } else {
-                    return verifier.serializeFeature(res.get(0).getFeature());
-                }
-            }
-            else{
-                return null;
-            }
-        } finally {
-            opt.delete();
-            res.delete();
-        }
-    }
-
-    public VerifyResult verifyFeature(byte[] feature1, byte[] feature2) {
-        /*************************************************
-         *
-         * #  比对核心代码
-         *    1.实例化为VerifyResult比对结果类
-         *    2.调用faceVerifier.verifyFeature()方法，其参数分别为捕获照图像特征，芯片照图像特征及比对结果对象
-         *    3.利用封装的Parcelable对象回传数据
-         *
-         *************************************************/
-        VerifyResult verifyResult = new VerifyResult();
-        FaceFeature faceFeature1 = null;
-        FaceFeature faceFeature2 = null;
-        try {
-            faceFeature1 = verifier.deserializeFeature(feature1);
-            faceFeature2 = verifier.deserializeFeature(feature2);
-            int rtn = verifier.verifyFeature(faceFeature1, faceFeature2, verifyResult);
-            if(rtn == 0){
-                return verifyResult;
-            }
-            else{
-                return null;
-            }
-
-        } finally {
-            //verifyResult.delete();
-            if (faceFeature1 != null) {
-                faceFeature1.delete();
-            }
-            if (faceFeature2 != null) {
-                faceFeature2.delete();
-            }
-        }
-    }
-
-    //class face verify result
-    class FVR {
-        int score;
-        boolean isSamePerson;
-        public FVR(VerifyResult result){
-            this.score = (int) Math.round(result.getSimilarity());
-            this.isSamePerson = result.getIsSamePerson();
-        }
-    }
-
 }

@@ -100,4 +100,5 @@ public class BitmapUtils {
         Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
         return newbm;
     }
+
 }

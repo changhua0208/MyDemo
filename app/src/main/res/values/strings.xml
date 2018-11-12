@@ -67,6 +67,7 @@
     <string name="add_audio">添加录音</string>
     <string name="add_photo">添加照片</string>
     <string name="msg_error">未知错误</string>
+    <string name="msg_capture_fail"></string>
 
     <string name="camera_permission_refuse">无法获取摄像头数据，请在手机应用权限管理中打开插旗地图的摄像头权限</string>
     <string name="audio_permission_refuse">无法获取音频数据，请在手机应用权限管理中打开插旗地图的通话及本地录音的权限</string>

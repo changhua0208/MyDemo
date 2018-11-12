@@ -1,22 +1,24 @@
 package com.houyi.notarization;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.houyi.notarization.mode.Person;
+import com.houyi.notarization.utils.BitmapUtils;
 import com.houyi.notarization.utils.CurrentIdentityUtils;
 import com.houyi.notarization.utils.IdentityHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.com.aratek.fp.Bione;
+import cn.com.aratek.fp.FingerprintImage;
+import cn.com.aratek.util.Result;
 
 /**
  * @author changhua.jiang
@@ -50,63 +52,13 @@ public class FpCollectionActivity extends FpBaseActivity {
     String[] features;
 
     int currentIndex;
+    private static String TAG = "FpCollectionActivity";
 
 
     static final int MSG_COLLECT_FAIL = 11;
     static final int  MSG_IMG_LOW_QUALITY = 12;
     static final int  MSG_COLLECT_SUCCESS = 13;
     static final int MSG_FEATURE_ERROR = 14;
-
-    Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case MSG_COLLECT_FAIL:
-                    if(mProgressDlg.isShowing())
-                        mProgressDlg.dismiss();
-                    toast("采集失败");
-                    break;
-                case MSG_IMG_LOW_QUALITY:
-                    if(mProgressDlg.isShowing())
-                        mProgressDlg.dismiss();
-                    toast("图片质量太低，请重新采集");
-                    break;
-                case MSG_COLLECT_SUCCESS:
-                    if(mProgressDlg.isShowing())
-                        mProgressDlg.dismiss();
-                    updateFpImgView(currentIndex);
-                    break;
-            }
-        }
-    };
-
-
-    Runnable collectFpRun = new Runnable() {
-        @Override
-        public void run() {
-            byte[] fpdata = ssF.getFingerByteData();
-            if(fpdata == null){
-                handler.sendEmptyMessage(MSG_COLLECT_FAIL);
-            }
-            else{
-                int nRet = ssF.getFingerQuality(fpdata);
-                if(nRet >= 60){
-                    String feature = ssF.getFingerInfoQuick(1,fpdata);
-                    if(TextUtils.isEmpty(feature)){
-                        handler.sendEmptyMessage(MSG_FEATURE_ERROR);
-                        return;
-                    }
-                    Bitmap bmp = BitmapFactory.decodeByteArray(fpdata,0,fpdata.length);
-                    bmps[currentIndex - 1] = bmp;
-                    features[currentIndex - 1] = feature;
-                    handler.sendEmptyMessage(MSG_COLLECT_SUCCESS);
-                }
-                else{
-                    handler.sendEmptyMessage(MSG_IMG_LOW_QUALITY);
-                }
-            }
-        }
-    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,92 +71,120 @@ public class FpCollectionActivity extends FpBaseActivity {
     public void loadFps(){
         bmps = new Bitmap[10];
         features = new String[10];
-        Person identity = CurrentIdentityUtils.currentIdentity();
-        IdentityHelper.getInstance().getFpImage(identity,bmps);
-        for(int i = 1;i<= bmps.length;i++){
-            if(bmps[i - 1] != null)
-                updateFpImgView(i);
-        }
+//        Person identity = CurrentIdentityUtils.currentIdentity();
+//        IdentityHelper.getInstance().getFpImage(identity,bmps);
+//        for(int i = 1;i<= bmps.length;i++){
+//            if(bmps[i - 1] != null)
+//                updateFpImgView(i);
+//        }
     }
 
     @OnClick(R.id.fp_l_1)
     public void onFpl1(){
-        mProgressDlg.show();
-        currentIndex = 1;
-        Thread thr = new Thread(collectFpRun);
-        thr.start();
+        if(mDeviceOpened){
+            currentIndex = 1;
+            captureFpImage();
+        }
     }
 
     @OnClick(R.id.fp_l_2)
     public void onFpl2(){
-        mProgressDlg.show();
         currentIndex = 2;
-        Thread thr = new Thread(collectFpRun);
-        thr.start();
+        captureFpImage();
     }
 
     @OnClick(R.id.fp_l_3)
     public void onFpl3(){
-        mProgressDlg.show();
         currentIndex = 3;
-        Thread thr = new Thread(collectFpRun);
-        thr.start();
+        captureFpImage();
     }
 
     @OnClick(R.id.fp_l_4)
     public void onFpl4(){
-        mProgressDlg.show();
         currentIndex = 4;
-        Thread thr = new Thread(collectFpRun);
-        thr.start();
+        captureFpImage();
     }
 
     @OnClick(R.id.fp_l_5)
     public void onFpl5(){
-        mProgressDlg.show();
         currentIndex = 5;
-        Thread thr = new Thread(collectFpRun);
-        thr.start();
+        captureFpImage();
     }
 
     @OnClick(R.id.fp_r_1)
     public void onFpr1(){
-        mProgressDlg.show();
         currentIndex = 6;
-        Thread thr = new Thread(collectFpRun);
-        thr.start();
+        captureFpImage();
     }
 
     @OnClick(R.id.fp_r_2)
     public void onFpr2(){
-        mProgressDlg.show();
         currentIndex = 7;
-        Thread thr = new Thread(collectFpRun);
-        thr.start();
+        captureFpImage();
     }
 
     @OnClick(R.id.fp_r_3)
     public void onFpr3(){
-        mProgressDlg.show();
         currentIndex = 8;
-        Thread thr = new Thread(collectFpRun);
-        thr.start();
+        captureFpImage();
     }
 
     @OnClick(R.id.fp_r_4)
     public void onFpr4(){
-        mProgressDlg.show();
         currentIndex = 9;
-        Thread thr = new Thread(collectFpRun);
-        thr.start();
+        captureFpImage();
     }
 
     @OnClick(R.id.fp_r_5)
     public void onFpr5(){
-        mProgressDlg.show();
         currentIndex = 10;
-        Thread thr = new Thread(collectFpRun);
-        thr.start();
+        captureFpImage();
+    }
+
+    private void captureFpImage(){
+        AsyncTask task = new AsyncTask() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                showWaitDlg();
+            }
+
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                mScanner.prepare();
+                Result res = mScanner.capture();
+                FingerprintImage fi = (FingerprintImage) res.data;
+                int quality = 0;
+                if (fi != null) {
+                    quality = Bione.getFingerprintQuality(fi);
+                    Log.i(TAG, "Fingerprint image quality is " + quality);
+
+                }
+                if(quality < 50){
+                    return null;
+                }
+                else{
+                    Bitmap bmp = BitmapUtils.byteArray2bmp(fi.convert2Bmp());
+                    return bmp;
+                }
+
+            }
+
+            @Override
+            protected void onPostExecute(Object ret) {
+                super.onPostExecute(ret);
+                if(ret != null){
+                    showMsg(R.string.msg_capture_fail);
+                }
+                else{
+                    bmps[currentIndex - 1] = (Bitmap) ret;
+                    updateFpImgView(currentIndex);
+                }
+                dismissWaitDlg();
+            }
+        };
+        task.execute();
+
     }
 
     private void updateFpImgView(int index){
@@ -280,6 +260,5 @@ public class FpCollectionActivity extends FpBaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //ssF.f_poweroff();
     }
 }

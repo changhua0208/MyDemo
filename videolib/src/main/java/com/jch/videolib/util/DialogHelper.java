@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 public class DialogHelper {
 
 
-    public static void showOneButtonDialog(Context mContext, String msgString,
+    public static void showOneButtonDialog(Context mContext, CharSequence msgString,
                                            CharSequence btnString, boolean cancelable, final AlertDialog.OnClickListener positiveListener) {
 
         new AlertDialog.Builder(mContext)

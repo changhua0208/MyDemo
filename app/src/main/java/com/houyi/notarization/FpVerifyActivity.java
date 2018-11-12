@@ -187,23 +187,23 @@ public class FpVerifyActivity extends FpBaseActivity {
 
     @OnClick(R.id.btn_comparison1)
     public void onComparison1(){
-        if(!TextUtils.isEmpty(identity.getFp1()) && !TextUtils.isEmpty(currentFpFeature1)){
-            int ret = ssF.fingerComparison(identity.getFp1(),currentFpFeature1);
-            mSimilarity1.setText("" + ret);
-            Date date = new Date();
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            mVerifyTime.setText(format.format(date));
-        }
+//        if(!TextUtils.isEmpty(identity.getFp1()) && !TextUtils.isEmpty(currentFpFeature1)){
+//            int ret = ssF.fingerComparison(identity.getFp1(),currentFpFeature1);
+//            mSimilarity1.setText("" + ret);
+//            Date date = new Date();
+//            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            mVerifyTime.setText(format.format(date));
+//        }
     }
     @OnClick(R.id.btn_comparison2)
     public void onComparision2(){
-        if(!TextUtils.isEmpty(identity.getFp2()) && !TextUtils.isEmpty(currentFpFeature2)){
-            int ret = ssF.fingerComparison(identity.getFp2(),currentFpFeature2);
-            mSimilarity2.setText("" + ret);
-            Date date = new Date();
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            mVerifyTime.setText(format.format(date));
-        }
+//        if(!TextUtils.isEmpty(identity.getFp2()) && !TextUtils.isEmpty(currentFpFeature2)){
+//            int ret = ssF.fingerComparison(identity.getFp2(),currentFpFeature2);
+//            mSimilarity2.setText("" + ret);
+//            Date date = new Date();
+//            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            mVerifyTime.setText(format.format(date));
+//        }
     }
 
 
